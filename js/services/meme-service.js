@@ -69,6 +69,10 @@ function getGmeme() {
   return gMeme
 }
 
+function getLineIdx(line) {
+  return gMeme.lines.findIndex((currLine) => currLine === line)
+}
+
 function setGmemeLineProp(selector, val, Idx = gMeme.selectedLineIdx) {
   gMeme.lines[Idx][selector] = val
 }
@@ -80,17 +84,20 @@ function addLine(txt, color, x, y, size = gElCanvas.width / 11) {
     size,
     x,
     y,
+    isDrag: false,
   })
 
   gMeme.selectedLineIdx = gMeme.lines.length - 1
   return getSelectedLine()
 }
 
-function switchLine() {
-  gMeme.selectedLineIdx =
-    gMeme.selectedLineIdx + 1 >= gMeme.lines.length
-      ? 0
-      : gMeme.selectedLineIdx + 1
+function switchLine(lineIdx = null) {
+  if (!lineIdx && lineIdx !== 0) {
+    gMeme.selectedLineIdx =
+      gMeme.selectedLineIdx + 1 >= gMeme.lines.length
+        ? 0
+        : gMeme.selectedLineIdx + 1
+  } else gMeme.selectedLineIdx = lineIdx
 
   return getSelectedLine()
 }

@@ -2,30 +2,33 @@ let gElCanvas
 let gCtx
 let gPrevCanvasWidth = 0
 let gWidthDiff = 0
+let gStartPos = null
+let gDraggedLine = null
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
-function initCanvas() {
+function initCanvas(isRefresh = true) {
   gElCanvas = document.querySelector('canvas')
   gCtx = gElCanvas.getContext('2d')
   gCtx.strokeStyle = 'black'
   gCtx.fillStyle = 'white'
 
   resizeCanvas()
-  addListeners()
+  if (isRefresh) addListeners()
   setInitLines()
   renderMeme()
 }
 
 function setInitLines() {
-  setGmemeLineProp('x', gElCanvas.width / 2)
+  setGmemeLineProp('x', gElCanvas.width / 2, 0)
   setGmemeLineProp('x', gElCanvas.width / 2, 1)
   setGmemeLineProp('y', gElCanvas.height - 40, 1)
 }
 
 function resizeCanvas() {
-  gPrevCanvasWidth = gElCanvas.width
+  // gPrevCanvasWidth = gElCanvas.width
   const elContainer = document.querySelector('.canvas-container')
   gElCanvas.width = elContainer.clientWidth
-  gWidthDiff = gElCanvas.width - gPrevCanvasWidth
+  // gWidthDiff = gElCanvas.width - gPrevCanvasWidth
   // console.log('gPrevCanvasWidth', gPrevCanvasWidth)
   // console.log('gElCanvas.width', gElCanvas.width)
   renderMeme()
@@ -77,6 +80,57 @@ function getEvPos(ev) {
   return pos
 }
 
+function onDown(ev) {
+  const pos = getEvPos(ev)
+  const clickedLine = getClickedLine(pos)
+  if (!clickedLine) return
+
+  gStartPos = { x: clickedLine.x, y: clickedLine.y }
+  // setGmemeLineProp('isDrag', true, getLineIdx(clickedLine))
+  gDraggedLine = clickedLine
+  document.querySelector('canvas').style.cursor = 'grabbing'
+  switchLine(getLineIdx(gDraggedLine))
+  renderMeme(true)
+}
+
+function onMove(ev) {
+  if (!gDraggedLine) return
+
+  const pos = getEvPos(ev)
+
+  const dx = pos.x - gStartPos.x
+  const dy = pos.y - gStartPos.y
+  const lineIdx = getLineIdx(gDraggedLine)
+
+  setGmemeLineProp('x', gDraggedLine.x + dx, lineIdx)
+  setGmemeLineProp('y', gDraggedLine.y + dy, lineIdx)
+
+  gStartPos = pos
+  switchLine(lineIdx)
+  renderMeme(true)
+}
+
+function onUp(ev) {
+  gDraggedLine = null
+  document.querySelector('canvas').style.cursor = 'grab'
+}
+
+function getClickedLine(pos) {
+  const lines = getGmeme().lines
+  if (!lines.length) return
+
+  return lines.find((line) => isLineClicked(pos, line))
+}
+
+function isLineClicked(clickedPos, line) {
+  return (
+    clickedPos.x >= line.x - line.txtWidth / 2 - 10 &&
+    clickedPos.x <= line.x + line.txtWidth / 2 + 10 &&
+    clickedPos.y >= line.y - line.size / 2 - 10 &&
+    clickedPos.y <= line.y + line.size / 2 + 10
+  )
+}
+
 // dowload canvas
 function downloadCanvas(elLink) {
   const dataUrl = gElCanvas.toDataURL()
@@ -91,19 +145,22 @@ function addListeners() {
   addMouseListeners()
   addTouchListeners()
   //Listen for resize ev
-  window.addEventListener('resize', resizeCanvas)
+  window.addEventListener('resize', () => {
+    // initCanvas(false)
+    renderMeme()
+  })
 }
 
 function addMouseListeners() {
-  gElCanvas.addEventListener('mousedown', (ev) => {})
-  gElCanvas.addEventListener('mousemove', (ev) => {})
-  gElCanvas.addEventListener('mouseup', () => {})
+  gElCanvas.addEventListener('mousedown', onDown)
+  gElCanvas.addEventListener('mousemove', onMove)
+  gElCanvas.addEventListener('mouseup', onUp)
 }
 
 function addTouchListeners() {
-  gElCanvas.addEventListener('touchstart', (ev) => {})
-  gElCanvas.addEventListener('touchmove', (ev) => {})
-  gElCanvas.addEventListener('touchend', () => {})
+  gElCanvas.addEventListener('touchstart', onDown)
+  gElCanvas.addEventListener('touchmove', onMove)
+  gElCanvas.addEventListener('touchend', onUp)
 }
 
 // upload img from local files
@@ -124,20 +181,10 @@ function loadImageFromInput(ev, onImageReady) {
 /////////
 
 function renderMeme(isRect = false) {
-  const diff = gPrevCanvasWidth === 300 ? 0 : gWidthDiff
-  // console.log('diff', diff)
   const meme = getGmeme()
   renderImg(meme.elImg)
   meme.lines.map((line, idx) => {
-    // drawText(
-    //   line.txt,
-    //   line.size + diff,
-    //   line.color,
-    //   line.x + diff,
-    //   line.y + diff
-    // )
     drawText(line.txt, line.size, line.color, line.x, line.y)
-
     setGmemeLineProp('txtWidth', gCtx.measureText(line.txt).width, idx)
   })
 

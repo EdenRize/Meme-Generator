@@ -53,22 +53,14 @@ function onChangeFontSize(isIncrease, ev) {
 function onAddLine(ev) {
   ev.stopPropagation()
   const line = 'New Line'
-  const newLine = addLine(
-    'New Line',
-    gColor,
-    gElCanvas.width / 2,
-    gElCanvas.height / 2,
-    gSize
-  )
+  addLine('New Line', gColor, gElCanvas.width / 2, gElCanvas.height / 2, gSize)
   renderMeme(true)
   document.querySelector('.meme-text-input').value = line
-  // addRect(newLine)
 }
 
 function onSwitchLine(ev) {
   ev.stopPropagation()
-  const newLine = switchLine(true)
+  const newLine = switchLine()
   document.querySelector('.meme-text-input').value = newLine.txt
   renderMeme(true)
-  // addRect(newLine)
 }

@@ -18,17 +18,13 @@
     <main>
       <section class="page-content"></section>
 
-      <section
-        hidden
-        class="editor-container"
-        onclick="console.log('here');renderMeme()"
-      >
+      <section hidden class="editor-container" onclick="renderMeme()">
         <img
           onclick="onCloseEditor()"
           class="close-btn pointer btn-hover"
           src="./img/assets/close.svg"
         />
-        <div class="canvas-container">
+        <div onclick="event.stopPropagation()" class="canvas-container">
           <canvas></canvas>
         </div>
 

@@ -61,3 +61,28 @@ var gKeywordSearchCountMap = { funny: 12, animal: 16, baby: 2 }
 function getGimges() {
   return gImgs
 }
+
+function getImg(imgId) {
+  return gImgs.find((img) => img.id === +imgId)
+}
+
+function setMeme(elImg, imgId) {
+  gMeme.elImg = elImg
+  gMeme.selectedImgId = gImgs.findIndex((img) => imgId === img.id)
+  gMeme.selectedLineIdx = 0
+  gMeme.lines = [
+    {
+      txt: 'I sometimes eat Falafel',
+      size: 20,
+      color: 'red',
+    },
+  ]
+}
+
+function getGmeme() {
+  return gMeme
+}
+
+function setGmemeLineProp(selector, val) {
+  gMeme.lines[selectedLineIdx][selector] = val
+}

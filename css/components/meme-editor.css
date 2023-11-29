@@ -1,0 +1,28 @@
+.editor-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-block: 10px;
+
+  border-radius: 10px;
+  background-color: var(--dark-color2);
+}
+
+.canvas-container {
+  width: 95%;
+  margin: 10px auto;
+  border-radius: 10px;
+  background-color: #e7bcde;
+}
+
+.canvas-container,
+canvas {
+  border-radius: 10px;
+  border: 1px solid #bb9cc0;
+}
+
+canvas {
+  background-color: white;
+}

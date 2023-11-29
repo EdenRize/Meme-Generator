@@ -10,11 +10,12 @@ function initCanvas() {
 
   resizeCanvas()
   addListeners()
+  renderMeme()
 }
 
 function resizeCanvas() {
   const elContainer = document.querySelector('.canvas-container')
-  gElCanvas.width = elContainer.clientWidth - 10
+  gElCanvas.width = elContainer.clientWidth
 }
 
 function drawText(text, x, y) {
@@ -80,6 +81,13 @@ function loadImageFromInput(ev, onImageReady) {
     img.onload = () => onImageReady(img)
   }
   reader.readAsDataURL(ev.target.files[0])
+}
+
+/////////
+
+function renderMeme() {
+  const meme = getGmeme()
+  renderImg(meme.elImg)
 }
 
 function renderImg(img) {

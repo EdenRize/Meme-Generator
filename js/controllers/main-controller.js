@@ -22,13 +22,17 @@ function renderGallery() {
 
   imges.map((img) => {
     strHTML += `
-    <div class="meme-card pointer">
-      <img class="meme-img" src="${img.url}" />
+    <div 
+    class="meme-card pointer">
+      <img
+      onclick="onOpenEditor(this)"
+      data-img-id="${img.id}"
+       class="meme-img" src="${img.url}" />
     </div>
     `
   })
 
   strHTML += `</section>`
 
-  document.querySelector('main').innerHTML = strHTML
+  document.querySelector('.page-content').innerHTML = strHTML
 }

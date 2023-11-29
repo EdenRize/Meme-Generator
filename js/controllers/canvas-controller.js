@@ -72,9 +72,10 @@ function getEvPos(ev) {
     // Gets the first touch point
     ev = ev.changedTouches[0]
     // Calc the right pos according to the touch screen
+
     pos = {
       x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-      y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+      y: ev.pageY - ev.target.offsetTop * 2 - ev.target.clientTop,
     }
   }
   return pos
@@ -90,6 +91,7 @@ function onDown(ev) {
   gDraggedLine = clickedLine
   document.querySelector('canvas').style.cursor = 'grabbing'
   switchLine(getLineIdx(gDraggedLine))
+  document.querySelector('.meme-text-input').value = gDraggedLine.txt
   renderMeme(true)
 }
 

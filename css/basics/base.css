@@ -1,5 +1,13 @@
+html {
+  font-family: Impact, sans-serif;
+  color: white;
+}
+
 body {
+  margin: unset;
   background-color: var(--light-color1);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
 button {

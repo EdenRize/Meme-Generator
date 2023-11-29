@@ -1,0 +1,8 @@
+header {
+  padding: 10px;
+  background-color: var(--dark-color1);
+}
+
+header h1 {
+  margin: unset;
+}

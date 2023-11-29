@@ -17,7 +17,6 @@ main {
   margin: auto;
   margin-block-start: 15px;
   padding-block: 10px;
-
   border-radius: 10px;
   background-color: var(--dark-color2);
 }

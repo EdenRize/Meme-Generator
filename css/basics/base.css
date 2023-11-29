@@ -1,0 +1,7 @@
+body {
+  background-color: var(--light-color1);
+}
+
+button {
+  cursor: pointer;
+}

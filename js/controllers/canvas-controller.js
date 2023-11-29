@@ -135,6 +135,7 @@ function isLineClicked(clickedPos, line) {
 
 // dowload canvas
 function downloadCanvas(elLink) {
+  renderMeme()
   const dataUrl = gElCanvas.toDataURL()
 
   elLink.href = dataUrl

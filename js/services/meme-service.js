@@ -84,3 +84,12 @@ function addLine(txt, color, x, y, size = gElCanvas.width / 11) {
 
   gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
+
+function switchLine() {
+  gMeme.selectedLineIdx =
+    gMeme.selectedLineIdx + 1 >= gMeme.lines.length
+      ? 0
+      : gMeme.selectedLineIdx + 1
+
+  return gMeme.lines[gMeme.selectedLineIdx]
+}

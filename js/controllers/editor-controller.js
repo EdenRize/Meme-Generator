@@ -53,6 +53,10 @@ function onAddLine() {
   const line = 'New Line'
   addLine('New Line', gColor, gElCanvas.width / 2, gElCanvas.height / 2, gSize)
   renderMeme()
-
   document.querySelector('.meme-text-input').value = line
+}
+
+function onSwitchLine() {
+  const newLine = switchLine()
+  document.querySelector('.meme-text-input').value = newLine.txt
 }

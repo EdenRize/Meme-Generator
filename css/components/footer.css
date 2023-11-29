@@ -1,0 +1,10 @@
+footer {
+  margin-block-start: 0.625em;
+  padding: 0.625em;
+
+  background-image: var(--gradient);
+}
+
+footer p {
+  margin: unset;
+}

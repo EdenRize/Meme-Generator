@@ -1,0 +1,21 @@
+.gallery-container {
+  width: 90%;
+  margin: auto;
+}
+
+.gallery-container .meme-card {
+  width: 90%;
+  justify-self: center;
+  transition: 0.2s;
+}
+
+.gallery-container .meme-card:hover {
+  scale: 1.1;
+}
+
+.gallery-container .meme-card .meme-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}

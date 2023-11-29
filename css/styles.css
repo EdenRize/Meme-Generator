@@ -2,6 +2,7 @@
 
 @import url(./setup/mq.css);
 @import url(./setup/variables.css);
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
 
 /* basics */
 
@@ -12,5 +13,7 @@
 /* components */
 
 @import url(./components/header.css);
+@import url(./components/footer.css);
 @import url(./components/meme-editor.css);
 @import url(./components/user-modal.css);
+@import url(./components/gallery.css);

@@ -1,9 +1,12 @@
 header {
-  margin-block: 0.3125em 0.625em;
+  position: sticky;
+  top: 0;
+  /* margin-block: 0.3125em 0.625em; */
   padding: 0.625em;
 
-  border-radius: 1.875em;
+  border-radius: 0 0 0.3125em 0.3125em;
   background-image: var(--gradient);
+  z-index: 10;
 }
 
 header h1 {

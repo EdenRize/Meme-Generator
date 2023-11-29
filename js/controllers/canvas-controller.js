@@ -9,6 +9,7 @@ function initCanvas() {
 
   resizeCanvas()
   addListeners()
+  setGmemeLineProp('x', gElCanvas.width / 2)
   renderMeme()
 }
 

@@ -1,6 +1,7 @@
 .gallery-container {
   width: 340px;
   margin: auto;
+  user-select: none;
 }
 
 .gallery-container .meme-card {
@@ -11,6 +12,7 @@
 
 .gallery-container .meme-card:hover {
   scale: 1.1;
+  filter: brightness(55%);
 }
 
 .gallery-container .meme-card .meme-img {

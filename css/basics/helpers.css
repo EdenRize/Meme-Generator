@@ -1,3 +1,9 @@
 .pointer {
   cursor: pointer;
 }
+
+button:hover,
+.btn-hover:hover {
+  filter: brightness(85%);
+  scale: 1.1;
+}

@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/6c5d160f70.js"
+      crossorigin="anonymous"
+    ></script>
     <title>MEME</title>
   </head>
   <body onload="onInit()">
@@ -15,13 +19,41 @@
       <section class="page-content"></section>
 
       <section hidden class="editor-container">
+        <img
+          onclick="onCloseEditor()"
+          class="close-btn pointer btn-hover"
+          src="./img/assets/close.svg"
+        />
         <div class="canvas-container">
           <canvas></canvas>
         </div>
-        <labe>
+        <label>
           Text:
-          <input onchange="onTextChange(event)" class="meme-text-input" type="text">
+          <input
+            onchange="onTextChange(event)"
+            class="meme-text-input"
+            type="text"
+          />
         </label>
+        <div class="color-picker-container">
+          <input
+            type="color"
+            class="color-input pointer"
+            oninput="onColorChange(this)"
+          />
+          <i
+            onclick="activateColorPicker()"
+            class="fa-solid fa-palette pointer btn-hover"
+          ></i>
+        </div>
+        <div class="export-container">
+          <a href="#" onclick="downloadCanvas(this)" download="file-name"
+            ><img
+              class="download-btn pointer btn-hover"
+              src="./img/assets/download.svg"
+              title="Download Img"
+          /></a>
+        </div>
       </section>
     </main>
 

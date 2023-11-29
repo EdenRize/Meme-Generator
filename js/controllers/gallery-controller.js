@@ -4,4 +4,5 @@ function onOpenEditor(elImg) {
   elEditor.hidden = false
   elEditor.dataset.imgId = imgId
   initEditor(elImg, imgId)
+  document.body.style.overflowY = 'hidden'
 }

@@ -9,5 +9,4 @@ function initEditor(elImg, imgId) {
 
 function onTextChange(ev) {
   const txt = ev.target.value
-  console.log('txt', txt)
 }

@@ -45,17 +45,7 @@ var gImgs = [
   { id: 24, url: './img/memes/putin.jpg', keywords: ['men'] },
   { id: 25, url: './img/memes/X-Everywhere.jpg', keywords: ['men'] },
 ]
-var gMeme = {
-  selectedImgId: 5,
-  selectedLineIdx: 0,
-  lines: [
-    {
-      txt: 'I sometimes eat Falafel',
-      size: 20,
-      color: 'red',
-    },
-  ],
-}
+var gMeme = {}
 var gKeywordSearchCountMap = { funny: 12, animal: 16, baby: 2 }
 
 function getGimges() {
@@ -68,13 +58,15 @@ function getImg(imgId) {
 
 function setMeme(elImg, imgId) {
   gMeme.elImg = elImg
-  gMeme.selectedImgId = gImgs.findIndex((img) => imgId === img.id)
+  gMeme.selectedImgId = gImgs.findIndex((img) => img.id === +imgId)
   gMeme.selectedLineIdx = 0
   gMeme.lines = [
     {
       txt: 'I sometimes eat Falafel',
-      size: 20,
-      color: 'red',
+      color: 'white',
+      size: 30,
+      x: 170,
+      y: 40,
     },
   ]
 }
@@ -83,6 +75,6 @@ function getGmeme() {
   return gMeme
 }
 
-function setGmemeLineProp(selector, val) {
-  gMeme.lines[selectedLineIdx][selector] = val
+function setGmemeLineProp(selector, val, Idx = gMeme.selectedLineIdx) {
+  gMeme.lines[Idx][selector] = val
 }

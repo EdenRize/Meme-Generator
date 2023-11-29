@@ -1,6 +1,5 @@
 let gElCanvas
 let gCtx
-let gTextSize
 
 function initCanvas() {
   gElCanvas = document.querySelector('canvas')
@@ -16,19 +15,18 @@ function initCanvas() {
 function resizeCanvas() {
   const elContainer = document.querySelector('.canvas-container')
   gElCanvas.width = elContainer.clientWidth
+  renderMeme()
 }
 
-function drawText(text, x, y) {
-  gCtx.font = `${gTextSize}px Impact`
+function drawText(text, size, color, x, y) {
+  gCtx.font = `${size}px Impact`
   gCtx.textAlign = 'center'
   gCtx.textBaseline = 'middle'
   gCtx.lineWidth = 2
+  gCtx.strokeStyle = 'black'
+  gCtx.fillStyle = color
   gCtx.fillText(text, x, y)
   gCtx.strokeText(text, x, y)
-  //   /////////////////////////
-  gCtx.lineWidth = gWidth
-
-  //   saveCoords(x, y)
 }
 
 function onClearCanvas() {
@@ -88,6 +86,10 @@ function loadImageFromInput(ev, onImageReady) {
 function renderMeme() {
   const meme = getGmeme()
   renderImg(meme.elImg)
+  meme.lines.map((line, idx) => {
+    drawText(line.txt, line.size, line.color, line.x, line.y)
+    setGmemeLineProp('txtWidth', gCtx.measureText(line.txt).width, idx)
+  })
 }
 
 function renderImg(img) {

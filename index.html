@@ -18,7 +18,11 @@
     <main>
       <section class="page-content"></section>
 
-      <section hidden class="editor-container">
+      <section
+        hidden
+        class="editor-container"
+        onclick="console.log('here');renderMeme()"
+      >
         <img
           onclick="onCloseEditor()"
           class="close-btn pointer btn-hover"
@@ -28,33 +32,35 @@
           <canvas></canvas>
         </div>
 
-        <label>
-          Text:
-          <input
-            oninput="onTextChange(event)"
-            class="meme-text-input"
-            type="text"
-          />
-        </label>
+        <div class="meme-text-container">
+          <label>
+            Text:
+            <input
+              oninput="onTextChange(event)"
+              class="meme-text-input"
+              type="text"
+            />
+          </label>
+        </div>
         <div class="text-edit-container">
           <img
-            onclick="onAddLine()"
+            onclick="onAddLine(event)"
             class="btn-hover pointer"
             src="./img/assets/add-text.svg"
           />
           <img
-            onclick="onSwitchLine()"
+            onclick="onSwitchLine(event)"
             class="btn-hover pointer"
             src="./img/assets/switch.svg"
           />
           <div class="font-size-container">
             <img
-              onclick="onChangeFontSize(true)"
+              onclick="onChangeFontSize(true, event)"
               class="font-size-btn pointer btn-hover"
               src="./img/assets/increase-font.svg"
             />
             <img
-              onclick="onChangeFontSize(false)"
+              onclick="onChangeFontSize(false, event)"
               class="font-size-btn pointer btn-hover"
               src="./img/assets/decrease-font.svg"
             />
@@ -63,10 +69,10 @@
             <input
               type="color"
               class="color-input pointer"
-              oninput="onColorChange(this)"
+              oninput="onColorChange(this, event)"
             />
             <i
-              onclick="activateColorPicker()"
+              onclick="activateColorPicker(event)"
               class="fa-solid fa-palette pointer btn-hover"
             ></i>
           </div>

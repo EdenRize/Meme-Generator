@@ -13,9 +13,10 @@ function initEditor(elImg, imgId) {
 }
 
 function onTextChange(ev) {
+  ev.stopPropagation()
   const txt = ev.target.value
   setGmemeLineProp('txt', txt)
-  renderMeme()
+  renderMeme(true)
 }
 
 function onCloseEditor() {
@@ -23,40 +24,53 @@ function onCloseEditor() {
   document.body.style.overflowY = 'scroll'
 }
 
-function activateColorPicker() {
-  var colorInput = document.querySelector('.color-input')
-  colorInput.click()
+function activateColorPicker(ev) {
+  ev.stopPropagation()
+  document.querySelector('.color-input').click()
 }
 
-function onColorChange(elInput) {
+function onColorChange(elInput, ev) {
+  ev.stopPropagation()
   const color = elInput.value
   document.querySelector('.fa-palette').style.color = color
 
   setGmemeLineProp('color', color)
-  renderMeme()
+  renderMeme(true)
 
   gColor = color
 }
 
-function onChangeFontSize(isIncrease) {
+function onChangeFontSize(isIncrease, ev) {
+  ev.stopPropagation()
   const meme = getGmeme()
   const diff = isIncrease ? 3 : -3
   const size = meme.lines[meme.selectedLineIdx].size + diff
 
   setGmemeLineProp('size', size)
-  renderMeme()
+  renderMeme(true)
 
   gSize = size
 }
 
-function onAddLine() {
+function onAddLine(ev) {
+  ev.stopPropagation()
   const line = 'New Line'
-  addLine('New Line', gColor, gElCanvas.width / 2, gElCanvas.height / 2, gSize)
-  renderMeme()
+  const newLine = addLine(
+    'New Line',
+    gColor,
+    gElCanvas.width / 2,
+    gElCanvas.height / 2,
+    gSize
+  )
+  renderMeme(true)
   document.querySelector('.meme-text-input').value = line
+  // addRect(newLine)
 }
 
-function onSwitchLine() {
-  const newLine = switchLine()
+function onSwitchLine(ev) {
+  ev.stopPropagation()
+  const newLine = switchLine(true)
   document.querySelector('.meme-text-input').value = newLine.txt
+  renderMeme(true)
+  // addRect(newLine)
 }

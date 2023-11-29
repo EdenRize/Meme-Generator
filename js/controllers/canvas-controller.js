@@ -36,12 +36,39 @@ function drawText(text, size, color, x, y) {
   gCtx.strokeText(text, x, y)
 }
 
+function drawRect(x, y, width, height) {
+  gCtx.beginPath()
+  gCtx.lineWidth = 2
+  gCtx.strokeStyle = '#e7bcde'
+  gCtx.strokeRect(x, y, width, height)
+}
+
 function onClearCanvas() {
   gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
 function onSetFillColor(ev) {
   gCtx.fillStyle = ev.target.value
+}
+
+function getEvPos(ev) {
+  let pos = {
+    x: ev.offsetX,
+    y: ev.offsetY,
+  }
+
+  if (TOUCH_EVS.includes(ev.type)) {
+    // Prevent triggering the mouse ev
+    ev.preventDefault()
+    // Gets the first touch point
+    ev = ev.changedTouches[0]
+    // Calc the right pos according to the touch screen
+    pos = {
+      x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+      y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+    }
+  }
+  return pos
 }
 
 // dowload canvas
@@ -90,13 +117,15 @@ function loadImageFromInput(ev, onImageReady) {
 
 /////////
 
-function renderMeme() {
+function renderMeme(isRect = false) {
   const meme = getGmeme()
   renderImg(meme.elImg)
   meme.lines.map((line, idx) => {
     drawText(line.txt, line.size, line.color, line.x, line.y)
     setGmemeLineProp('txtWidth', gCtx.measureText(line.txt).width, idx)
   })
+
+  if (isRect) addRect(getSelectedLine())
 }
 
 function renderImg(img) {
@@ -109,4 +138,13 @@ function coverCanvasWithImg(elImg) {
   gElCanvas.height =
     (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+function addRect(line) {
+  drawRect(
+    line.x - line.txtWidth / 2 - line.size / 2,
+    line.y - line.size / 2,
+    line.txtWidth + line.size,
+    line.size
+  )
 }

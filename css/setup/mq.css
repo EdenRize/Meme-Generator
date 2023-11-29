@@ -1,0 +1,19 @@
+@media (min-width: 500px) {
+  .canvas-container {
+    width: 500px;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    width: 950px;
+  }
+
+  .gallery-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .canvas-container {
+    width: 700px;
+  }
+}

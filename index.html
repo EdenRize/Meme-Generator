@@ -65,14 +65,14 @@
               src="./img/assets/decrease-font.svg"
             />
           </div>
-          <div class="color-picker-container">
+          <div onclick="event.stopPropagation()" class="color-picker-container">
             <input
               type="color"
               class="color-input pointer"
-              oninput="onColorChange(this, event)"
+              oninput="onColorChange(this)"
             />
             <i
-              onclick="activateColorPicker(event)"
+              onclick="activateColorPicker()"
               class="fa-solid fa-palette pointer btn-hover"
             ></i>
           </div>

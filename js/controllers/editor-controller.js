@@ -24,13 +24,11 @@ function onCloseEditor() {
   document.body.style.overflowY = 'scroll'
 }
 
-function activateColorPicker(ev) {
-  ev.stopPropagation()
+function activateColorPicker() {
   document.querySelector('.color-input').click()
 }
 
-function onColorChange(elInput, ev) {
-  ev.stopPropagation()
+function onColorChange(elInput) {
   const color = elInput.value
   document.querySelector('.fa-palette').style.color = color
 

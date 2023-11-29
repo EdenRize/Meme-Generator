@@ -1,11 +1,12 @@
 .gallery-container {
-  width: 340px;
-  margin: auto;
+  /* width: 340px; */
+  /* margin: auto; */
+  margin-inline: 15px;
   user-select: none;
 }
 
 .gallery-container .meme-card {
-  width: 90%;
+  width: 100%;
   justify-self: center;
   transition: 0.2s;
 }

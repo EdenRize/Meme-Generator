@@ -24,6 +24,7 @@ canvas {
 
 canvas {
   background-color: white;
+  cursor: grab;
 }
 
 .editor-container .close-btn {

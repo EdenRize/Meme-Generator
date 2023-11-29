@@ -1,5 +1,7 @@
 let gElCanvas
 let gCtx
+let gPrevCanvasWidth = 0
+let gWidthDiff = 0
 
 function initCanvas() {
   gElCanvas = document.querySelector('canvas')
@@ -20,8 +22,12 @@ function setInitLines() {
 }
 
 function resizeCanvas() {
+  gPrevCanvasWidth = gElCanvas.width
   const elContainer = document.querySelector('.canvas-container')
   gElCanvas.width = elContainer.clientWidth
+  gWidthDiff = gElCanvas.width - gPrevCanvasWidth
+  // console.log('gPrevCanvasWidth', gPrevCanvasWidth)
+  // console.log('gElCanvas.width', gElCanvas.width)
   renderMeme()
 }
 
@@ -118,10 +124,20 @@ function loadImageFromInput(ev, onImageReady) {
 /////////
 
 function renderMeme(isRect = false) {
+  const diff = gPrevCanvasWidth === 300 ? 0 : gWidthDiff
+  // console.log('diff', diff)
   const meme = getGmeme()
   renderImg(meme.elImg)
   meme.lines.map((line, idx) => {
+    // drawText(
+    //   line.txt,
+    //   line.size + diff,
+    //   line.color,
+    //   line.x + diff,
+    //   line.y + diff
+    // )
     drawText(line.txt, line.size, line.color, line.x, line.y)
+
     setGmemeLineProp('txtWidth', gCtx.measureText(line.txt).width, idx)
   })
 

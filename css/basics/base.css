@@ -5,7 +5,7 @@ html {
 
 body {
   margin: unset;
-  background-color: var(--light-color1);
+  background-color: var(--dark-color2);
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }

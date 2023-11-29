@@ -1,6 +1,6 @@
 header {
   padding: 10px;
-  background-color: var(--dark-color1);
+  background-image: var(--gradient);
 }
 
 header h1 {

@@ -47,13 +47,14 @@ canvas {
 
 .editor-container .color-picker-container {
   position: relative;
+  display: inline-block;
 }
 
 .editor-container .fa-palette {
   position: absolute;
   top: 0;
   left: 0;
-  font-size: 1.5625em;
+  font-size: 1.875em;
   transition: 0.2s;
 }
 
@@ -63,4 +64,22 @@ canvas {
   left: 0;
   width: 100%;
   opacity: 0;
+}
+
+.editor-container .font-size-btn {
+  width: 35px;
+  margin-inline: 7px;
+}
+
+.text-edit-container {
+  display: grid;
+  grid-auto-flow: column;
+  width: 80%;
+
+  margin: auto;
+  margin-block-start: 15px;
+}
+
+.text-edit-container * {
+  justify-self: center;
 }

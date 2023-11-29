@@ -30,3 +30,11 @@ function onColorChange(elInput) {
   setGmemeLineProp('color', color)
   renderMeme()
 }
+
+function onChangeFontSize(isIncrease) {
+  const meme = getGmeme()
+  const diff = isIncrease ? 3 : -3
+
+  setGmemeLineProp('size', meme.lines[meme.selectedLineIdx].size + diff)
+  renderMeme()
+}

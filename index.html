@@ -27,6 +27,7 @@
         <div class="canvas-container">
           <canvas></canvas>
         </div>
+
         <label>
           Text:
           <input
@@ -35,16 +36,30 @@
             type="text"
           />
         </label>
-        <div class="color-picker-container">
-          <input
-            type="color"
-            class="color-input pointer"
-            oninput="onColorChange(this)"
-          />
-          <i
-            onclick="activateColorPicker()"
-            class="fa-solid fa-palette pointer btn-hover"
-          ></i>
+        <div class="text-edit-container">
+          <div class="color-picker-container">
+            <input
+              type="color"
+              class="color-input pointer"
+              oninput="onColorChange(this)"
+            />
+            <i
+              onclick="activateColorPicker()"
+              class="fa-solid fa-palette pointer btn-hover"
+            ></i>
+          </div>
+          <div class="font-size-container">
+            <img
+              onclick="onChangeFontSize(true)"
+              class="font-size-btn pointer btn-hover"
+              src="./img/assets/increase-font.svg"
+            />
+            <img
+              onclick="onChangeFontSize(false)"
+              class="font-size-btn pointer btn-hover"
+              src="./img/assets/decrease-font.svg"
+            />
+          </div>
         </div>
         <div class="export-container">
           <a href="#" onclick="downloadCanvas(this)" download="file-name"

@@ -31,23 +31,17 @@
         <label>
           Text:
           <input
-            onchange="onTextChange(event)"
+            oninput="onTextChange(event)"
             class="meme-text-input"
             type="text"
           />
         </label>
         <div class="text-edit-container">
-          <div class="color-picker-container">
-            <input
-              type="color"
-              class="color-input pointer"
-              oninput="onColorChange(this)"
-            />
-            <i
-              onclick="activateColorPicker()"
-              class="fa-solid fa-palette pointer btn-hover"
-            ></i>
-          </div>
+          <img
+            onclick="onAddLine()"
+            class="btn-hover pointer"
+            src="./img/assets/add-text.svg"
+          />
           <div class="font-size-container">
             <img
               onclick="onChangeFontSize(true)"
@@ -59,6 +53,17 @@
               class="font-size-btn pointer btn-hover"
               src="./img/assets/decrease-font.svg"
             />
+          </div>
+          <div class="color-picker-container">
+            <input
+              type="color"
+              class="color-input pointer"
+              oninput="onColorChange(this)"
+            />
+            <i
+              onclick="activateColorPicker()"
+              class="fa-solid fa-palette pointer btn-hover"
+            ></i>
           </div>
         </div>
         <div class="export-container">

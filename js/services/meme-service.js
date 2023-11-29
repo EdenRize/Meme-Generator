@@ -59,16 +59,10 @@ function getImg(imgId) {
 function setMeme(elImg, imgId) {
   gMeme.elImg = elImg
   gMeme.selectedImgId = gImgs.findIndex((img) => img.id === +imgId)
+  gMeme.lines = []
+  addLine('I sometimes eat Falafel', 'white', 170, 40, 30)
+  addLine('And I like it', 'white', 170, 40, 30)
   gMeme.selectedLineIdx = 0
-  gMeme.lines = [
-    {
-      txt: 'I sometimes eat Falafel',
-      color: 'white',
-      size: 30,
-      x: 170,
-      y: 40,
-    },
-  ]
 }
 
 function getGmeme() {
@@ -77,4 +71,16 @@ function getGmeme() {
 
 function setGmemeLineProp(selector, val, Idx = gMeme.selectedLineIdx) {
   gMeme.lines[Idx][selector] = val
+}
+
+function addLine(txt, color, x, y, size = gElCanvas.width / 11) {
+  gMeme.lines.push({
+    txt,
+    color,
+    size,
+    x,
+    y,
+  })
+
+  gMeme.selectedLineIdx = gMeme.lines.length - 1
 }

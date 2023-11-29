@@ -1,4 +1,9 @@
+var gColor
+var gSize
+
 function initEditor(elImg, imgId) {
+  gColor = 'white'
+
   setMeme(elImg, imgId)
   initCanvas()
 
@@ -29,12 +34,25 @@ function onColorChange(elInput) {
 
   setGmemeLineProp('color', color)
   renderMeme()
+
+  gColor = color
 }
 
 function onChangeFontSize(isIncrease) {
   const meme = getGmeme()
   const diff = isIncrease ? 3 : -3
+  const size = meme.lines[meme.selectedLineIdx].size + diff
 
-  setGmemeLineProp('size', meme.lines[meme.selectedLineIdx].size + diff)
+  setGmemeLineProp('size', size)
   renderMeme()
+
+  gSize = size
+}
+
+function onAddLine() {
+  const line = 'New Line'
+  addLine('New Line', gColor, gElCanvas.width / 2, gElCanvas.height / 2, gSize)
+  renderMeme()
+
+  document.querySelector('.meme-text-input').value = line
 }

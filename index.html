@@ -38,29 +38,93 @@
             />
           </label>
         </div>
-        <div class="text-edit-container">
-          <img
-            onclick="onAddLine(event)"
-            class="btn-hover pointer"
-            src="./img/assets/add-text.svg"
-          />
+        <div onclick="event.stopPropagation()" class="text-change-container">
           <img
             onclick="onSwitchLine(event)"
             class="btn-hover pointer"
             src="./img/assets/switch.svg"
           />
-          <div class="font-size-container">
-            <img
-              onclick="onChangeFontSize(true, event)"
-              class="font-size-btn pointer btn-hover"
-              src="./img/assets/increase-font.svg"
+
+          <img
+            onclick="onAddLine(event)"
+            class="btn-hover pointer"
+            src="./img/assets/add-text.svg"
+          />
+
+          <img
+            onclick="onDeleteLine()"
+            class="btn-hover pointer"
+            src="./img/assets/delete.svg"
+          />
+
+          <img
+            onclick="onMoveText(true)"
+            class="btn-hover pointer"
+            src="./img/assets/up.svg"
+          />
+
+          <img
+            onclick="onMoveText(false)"
+            class="btn-hover pointer"
+            src="./img/assets/down.svg"
+          />
+        </div>
+
+        <div onclick="event.stopPropagation()" class="text-edit-container">
+          <img
+            onclick="onChangeFontSize(true, event)"
+            class="font-size-btn pointer btn-hover"
+            src="./img/assets/increase-font.svg"
+          />
+          <img
+            onclick="onChangeFontSize(false, event)"
+            class="font-size-btn pointer btn-hover"
+            src="./img/assets/decrease-font.svg"
+          />
+
+          <img
+            class="pointer btn-hover"
+            onclick="onChangeAlign('right')"
+            src="./img/assets/align-left.svg"
+            alt=""
+          />
+          <img
+            class="pointer btn-hover"
+            onclick="onChangeAlign('center')"
+            src="./img/assets/align-center.svg"
+            alt=""
+          />
+          <img
+            class="pointer btn-hover"
+            onclick="onChangeAlign('left')"
+            src="./img/assets/align-right.svg"
+            alt=""
+          />
+
+          <select
+            onchange="onChangeFontFamily(this)"
+            class="font-family-select"
+          >
+            <option value="Impact">IMPACT</option>
+            <option value="Franklin Gothic Medium">FRANKLIN</option>
+            <option value="Verdana">VERDANA</option>
+          </select>
+
+          <div
+            onclick="event.stopPropagation()"
+            class="stroke-picker-container"
+          >
+            <input
+              type="color"
+              class="stroke-input pointer"
+              oninput="onStrokeChange(this)"
             />
-            <img
-              onclick="onChangeFontSize(false, event)"
-              class="font-size-btn pointer btn-hover"
-              src="./img/assets/decrease-font.svg"
-            />
+            <i
+              onclick="activatePicker('.stroke-input')"
+              class="fa-solid fa-underline pointer btn-hover"
+            ></i>
           </div>
+
           <div onclick="event.stopPropagation()" class="color-picker-container">
             <input
               type="color"
@@ -68,7 +132,7 @@
               oninput="onColorChange(this)"
             />
             <i
-              onclick="activateColorPicker()"
+              onclick="activatePicker('.color-input')"
               class="fa-solid fa-palette pointer btn-hover"
             ></i>
           </div>

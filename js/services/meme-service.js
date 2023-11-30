@@ -60,8 +60,8 @@ function setMeme(elImg, imgId) {
   gMeme.elImg = elImg
   gMeme.selectedImgId = gImgs.findIndex((img) => img.id === +imgId)
   gMeme.lines = []
-  addLine('I sometimes eat Falafel', 'white', 170, 40, 30)
-  addLine('And I like it', 'white', 170, 40, 30)
+  addLine('I sometimes eat Falafel', 'white', 'black', 170, 40, 30)
+  addLine('And I like it', 'white', 'black', 170, 40, 30)
   gMeme.selectedLineIdx = 0
 }
 
@@ -74,13 +74,15 @@ function getLineIdx(line) {
 }
 
 function setGmemeLineProp(selector, val, Idx = gMeme.selectedLineIdx) {
+  if (!gMeme.lines.length) return
   gMeme.lines[Idx][selector] = val
 }
 
-function addLine(txt, color, x, y, size = gElCanvas.width / 11) {
+function addLine(txt, color, stroke, x, y, size = gElCanvas.width / 11) {
   gMeme.lines.push({
     txt,
     color,
+    stroke,
     size,
     x,
     y,
@@ -92,6 +94,8 @@ function addLine(txt, color, x, y, size = gElCanvas.width / 11) {
 }
 
 function switchLine(lineIdx = null) {
+  if (!gMeme.lines.length) return
+
   if (!lineIdx && lineIdx !== 0) {
     gMeme.selectedLineIdx =
       gMeme.selectedLineIdx + 1 >= gMeme.lines.length
@@ -104,4 +108,10 @@ function switchLine(lineIdx = null) {
 
 function getSelectedLine() {
   return gMeme.lines[gMeme.selectedLineIdx]
+}
+
+function deleteLine() {
+  const lineIdx = getLineIdx(getSelectedLine())
+  gMeme.lines.splice(lineIdx, 1)
+  gMeme.selectedLineIdx = 0
 }

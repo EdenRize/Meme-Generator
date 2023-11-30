@@ -6,6 +6,7 @@
   height: calc(100vh - 55px);
   box-sizing: border-box;
   padding-block: 10px;
+  overflow-y: auto;
 
   background-color: var(--dark-color2);
 }
@@ -13,13 +14,13 @@
 .canvas-container {
   width: 95%;
   margin: 40px auto;
-  background-color: #e7bcde;
+  background-color: #00a5af;
 }
 
 .canvas-container,
 canvas {
   border-radius: 10px;
-  border: 1px solid #bb9cc0;
+  border: 1px solid #00a5af;
 }
 
 canvas {
@@ -36,9 +37,8 @@ canvas {
 
 .export-container {
   position: absolute;
-  bottom: 20px;
-  width: 100%;
-  text-align: center;
+  top: 10px;
+  right: 10px;
 }
 
 .editor-container .download-btn {
@@ -46,39 +46,61 @@ canvas {
   transition: 0.2s;
 }
 
+.editor-container .stroke-picker-container {
+  position: relative;
+}
+
+.editor-container .fa-underline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  font-size: 1.875em;
+  transition: 0.2s;
+}
+
+.editor-container .stroke-input {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 100%;
+  opacity: 0;
+}
+
 .editor-container .color-picker-container {
   position: relative;
-  display: inline-block;
 }
 
 .editor-container .fa-palette {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
   font-size: 1.875em;
   transition: 0.2s;
 }
 
 .editor-container .color-input {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
   width: 100%;
   opacity: 0;
 }
 
 .text-edit-container img {
   width: 35px;
-  margin-inline: 7px;
 }
 
 .text-edit-container {
-  display: grid;
-  grid-auto-flow: column;
   width: 80%;
 
+  background-color: #00a5af;
   margin: auto;
-  margin-block-start: 15px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .text-edit-container * {
@@ -89,6 +111,7 @@ canvas {
 .meme-text-container {
   width: 100%;
   text-align: center;
+  margin-block-end: 35px;
 }
 
 .meme-text-input {
@@ -97,4 +120,30 @@ canvas {
 
   border: 1px solid #22252c;
   border-radius: 10px;
+}
+
+.text-change-container {
+  margin-block-end: 35px;
+  text-align: center;
+}
+
+.text-change-container img {
+  width: 35px;
+  margin-inline: 7px;
+}
+
+.font-family-select {
+  width: 100%;
+  padding: 8px;
+  font-size: 1.0625em;
+
+  border-radius: 10px;
+  border: 1px solid #22252c;
+  background-color: var(--dark-color1);
+  color: #00b48e;
+  cursor: pointer;
+}
+
+.text-change-container * {
+  transition: 0.2s;
 }

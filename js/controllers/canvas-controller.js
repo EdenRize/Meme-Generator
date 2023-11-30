@@ -34,12 +34,12 @@ function resizeCanvas() {
   renderMeme()
 }
 
-function drawText(text, size, color, x, y) {
-  gCtx.font = `${size}px Impact`
-  gCtx.textAlign = 'center'
+function drawText(text, size, color, stroke, x, y) {
+  gCtx.font = `${size}px ${gFontFamily}`
+  gCtx.textAlign = `${gTextAlign}`
   gCtx.textBaseline = 'middle'
   gCtx.lineWidth = 2
-  gCtx.strokeStyle = 'black'
+  gCtx.strokeStyle = stroke
   gCtx.fillStyle = color
   gCtx.fillText(text, x, y)
   gCtx.strokeText(text, x, y)
@@ -48,7 +48,7 @@ function drawText(text, size, color, x, y) {
 function drawRect(x, y, width, height) {
   gCtx.beginPath()
   gCtx.lineWidth = 2
-  gCtx.strokeStyle = '#e7bcde'
+  gCtx.strokeStyle = '#00a5af'
   gCtx.strokeRect(x, y, width, height)
 }
 
@@ -126,8 +126,8 @@ function getClickedLine(pos) {
 
 function isLineClicked(clickedPos, line) {
   return (
-    clickedPos.x >= line.x - line.txtWidth / 2 - 10 &&
-    clickedPos.x <= line.x + line.txtWidth / 2 + 10 &&
+    clickedPos.x >= line.x - line.txtWidth &&
+    clickedPos.x <= line.x + line.txtWidth &&
     clickedPos.y >= line.y - line.size / 2 - 10 &&
     clickedPos.y <= line.y + line.size / 2 + 10
   )
@@ -186,8 +186,11 @@ function loadImageFromInput(ev, onImageReady) {
 function renderMeme(isRect = false) {
   const meme = getGmeme()
   renderImg(meme.elImg)
+  if (!meme.lines.length) {
+    return
+  }
   meme.lines.map((line, idx) => {
-    drawText(line.txt, line.size, line.color, line.x, line.y)
+    drawText(line.txt, line.size, line.color, line.stroke, line.x, line.y)
     setGmemeLineProp('txtWidth', gCtx.measureText(line.txt).width, idx)
   })
 
@@ -208,9 +211,9 @@ function coverCanvasWithImg(elImg) {
 
 function addRect(line) {
   drawRect(
-    line.x - line.txtWidth / 2 - line.size / 2,
+    line.x - line.txtWidth,
     line.y - line.size / 2,
-    line.txtWidth + line.size,
+    line.txtWidth * 2,
     line.size
   )
 }

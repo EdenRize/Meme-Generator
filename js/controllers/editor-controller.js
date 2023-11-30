@@ -1,9 +1,14 @@
 var gColor
+var gStroke
 var gSize
+var gFontFamily
+var gTextAlign
 
 function initEditor(elImg, imgId) {
   gColor = 'white'
-
+  gStroke = 'black'
+  gFontFamily = 'impact'
+  gTextAlign = 'center'
   setMeme(elImg, imgId)
   initCanvas()
 
@@ -24,8 +29,8 @@ function onCloseEditor() {
   document.body.style.overflowY = 'scroll'
 }
 
-function activateColorPicker() {
-  document.querySelector('.color-input').click()
+function activatePicker(selector) {
+  document.querySelector(selector).click()
 }
 
 function onColorChange(elInput) {
@@ -38,9 +43,20 @@ function onColorChange(elInput) {
   gColor = color
 }
 
+function onStrokeChange(elInput) {
+  const strokeColor = elInput.value
+  document.querySelector('.fa-underline').style.color = strokeColor
+
+  setGmemeLineProp('stroke', strokeColor)
+  renderMeme(true)
+
+  gStroke = strokeColor
+}
+
 function onChangeFontSize(isIncrease, ev) {
   ev.stopPropagation()
   const meme = getGmeme()
+  if (!meme.lines.length) return
   const diff = isIncrease ? 3 : -3
   const size = meme.lines[meme.selectedLineIdx].size + diff
 
@@ -53,7 +69,14 @@ function onChangeFontSize(isIncrease, ev) {
 function onAddLine(ev) {
   ev.stopPropagation()
   const line = 'New Line'
-  addLine('New Line', gColor, gElCanvas.width / 2, gElCanvas.height / 2, gSize)
+  addLine(
+    'New Line',
+    gColor,
+    gStroke,
+    gElCanvas.width / 2,
+    gElCanvas.height / 2,
+    gSize
+  )
   renderMeme(true)
   document.querySelector('.meme-text-input').value = line
 }
@@ -61,6 +84,38 @@ function onAddLine(ev) {
 function onSwitchLine(ev) {
   ev.stopPropagation()
   const newLine = switchLine()
-  document.querySelector('.meme-text-input').value = newLine.txt
+  document.querySelector('.meme-text-input').value = newLine
+    ? newLine.txt
+    : null
+  renderMeme(true)
+}
+
+function onChangeFontFamily(elSelect) {
+  gFontFamily = elSelect.value
+  renderMeme(true)
+}
+
+function onChangeAlign(dir) {
+  gTextAlign = dir
+  renderMeme(true)
+}
+
+function onDeleteLine() {
+  deleteLine()
+  const newLine = switchLine()
+  document.querySelector('.meme-text-input').value = newLine
+    ? newLine.txt
+    : null
+  renderMeme(true)
+}
+
+function onMoveText(isUp) {
+  const meme = getGmeme()
+  if (!meme.lines.length) return
+
+  const diff = isUp ? -3 : 3
+  console.log('diff', diff)
+  const posY = meme.lines[meme.selectedLineIdx].y + diff
+  setGmemeLineProp('y', posY)
   renderMeme(true)
 }

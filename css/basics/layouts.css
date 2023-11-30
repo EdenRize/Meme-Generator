@@ -4,3 +4,13 @@
   grid-auto-rows: 1fr;
   gap: 15px;
 }
+
+.text-edit-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.font-family-select {
+  grid-area: 2 / 1 / span 1 / span 3;
+}

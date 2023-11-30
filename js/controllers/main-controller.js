@@ -54,6 +54,7 @@ function renderSavedMemes() {
   const savedMemes = getSavedMemes()
   var strHTML = `
   <section class="saved-memes-container">
+  <h2>Your Saved Memes</h2>
   `
 
   if (!savedMemes) {
@@ -61,6 +62,9 @@ function renderSavedMemes() {
     <p>No saved memes</p>
     `
   } else {
+    strHTML += `
+    <div class="memes-container">
+    `
     savedMemes.map((meme) => {
       strHTML += `
       <div 
@@ -84,6 +88,7 @@ function renderSavedMemes() {
 
 function onRenderPage(pageName) {
   closeMenu()
+  onCloseEditor()
   if (getCurrPage() === pageName) return
   setCurrPage(pageName)
   renderPage()

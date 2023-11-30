@@ -1,9 +1,14 @@
-function onOpenEditor(elImg) {
+function onOpenEditor(elImg, isSaved, memeIdx) {
   const imgId = elImg.dataset.imgId
   const elEditor = document.querySelector('.editor-container')
   elEditor.hidden = false
   elEditor.dataset.imgId = imgId
-  initEditor(elImg, imgId)
+  const img = getImg(imgId)
+  if (isSaved) {
+    // elImg = new Image()
+    // elImg.src = img.url
+  }
+  initEditor(elImg, imgId, isSaved, memeIdx)
   document.body.style.overflowY = 'hidden'
 }
 

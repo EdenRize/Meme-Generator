@@ -56,9 +56,16 @@ function getImg(imgId) {
   return gImgs.find((img) => img.id === +imgId)
 }
 
-function setMeme(elImg, imgId) {
+function setMeme(elImg, imgId, isSaved, memeIdx) {
+  if (isSaved) {
+    gMeme = getFromStorage('savedMemes')[memeIdx]
+    gMeme.elImg = recreateImg(gMeme.elImg)
+    gMeme.elImg.src = JSON.parse(JSON.stringify(getImg(imgId).url))
+    return
+  }
+
   gMeme.elImg = elImg
-  gMeme.selectedImgId = gImgs.findIndex((img) => img.id === +imgId)
+  gMeme.selectedImgId = gImgs.find((img) => img.id === +imgId).id
   gMeme.lines = []
   addLine('I sometimes eat Falafel', 'white', 'black', 170, 40, 30)
   addLine('And I like it', 'white', 'black', 170, 40, 30)
@@ -119,14 +126,18 @@ function deleteLine() {
 function saveMeme() {
   var memes = getFromStorage('savedMemes')
   if (!memes || !memes.length) memes = []
+
   gMeme.fontFamily = gFontFamily
   gMeme.textAlign = gTextAlign
+
   const currElImg = gMeme.elImg
   gMeme.elImg = {
     src: gMeme.elImg.src,
     width: gMeme.elImg.width,
     height: gMeme.elImg.height,
   }
+
+  gMeme.display = gElCanvas.toDataURL()
 
   memes.push(gMeme)
   saveToStorage('savedMemes', memes)
@@ -139,12 +150,16 @@ function getSavedMemes() {
 
   // recreating imges
   memes.map((meme) => {
-    const recreatedImage = new Image()
-    recreatedImage.src = meme.elImg.src
-    recreatedImage.width = meme.elImg.width
-    recreatedImage.height = meme.elImg.height
-    meme.elImg = recreatedImage
+    meme.elImg = recreateImg(meme.elImg)
   })
 
   return memes
+}
+
+function recreateImg(elImg) {
+  const recreatedImage = new Image()
+  recreatedImage.src = elImg.src
+  recreatedImage.width = elImg.width
+  recreatedImage.height = elImg.height
+  return recreatedImage
 }

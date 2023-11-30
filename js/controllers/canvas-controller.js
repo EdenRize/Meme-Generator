@@ -6,7 +6,7 @@ let gStartPos = null
 let gDraggedLine = null
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
-function initCanvas(isRefresh = true) {
+function initCanvas(isRefresh = true, isSaved = false) {
   gElCanvas = document.querySelector('canvas')
   gCtx = gElCanvas.getContext('2d')
   gCtx.strokeStyle = 'black'
@@ -14,7 +14,7 @@ function initCanvas(isRefresh = true) {
 
   resizeCanvas()
   if (isRefresh) addListeners()
-  setInitLines()
+  if (!isSaved) setInitLines()
   renderMeme()
 }
 
@@ -87,9 +87,9 @@ function onDown(ev) {
   if (!clickedLine) return
 
   gStartPos = { x: clickedLine.x, y: clickedLine.y }
-  // setGmemeLineProp('isDrag', true, getLineIdx(clickedLine))
   gDraggedLine = clickedLine
   document.querySelector('canvas').style.cursor = 'grabbing'
+
   switchLine(getLineIdx(gDraggedLine))
   document.querySelector('.meme-text-input').value = gDraggedLine.txt
   renderMeme(true)
@@ -149,8 +149,8 @@ function addListeners() {
   addTouchListeners()
   //Listen for resize ev
   window.addEventListener('resize', () => {
-    // initCanvas(false)
-    renderMeme()
+    initCanvas(false)
+    // renderMeme()
   })
 }
 

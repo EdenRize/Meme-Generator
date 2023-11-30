@@ -65,14 +65,14 @@ function renderSavedMemes() {
     strHTML += `
     <div class="memes-container">
     `
-    savedMemes.map((meme) => {
+    savedMemes.map((meme, idx) => {
       strHTML += `
       <div 
     class="meme-card pointer">
       <img
-      onclick="onOpenEditor(this)"
+      onclick="onOpenEditor(this, true, ${idx})"
       data-img-id="${meme.selectedImgId}"
-       class="meme-img" src="${meme.elImg.src}" />
+       class="meme-img" src="${meme.display}" />
     </div>
       `
     })

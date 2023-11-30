@@ -4,13 +4,13 @@ var gSize
 var gFontFamily
 var gTextAlign
 
-function initEditor(elImg, imgId) {
+function initEditor(elImg, imgId, isSaved, memeIdx) {
   gColor = 'white'
   gStroke = 'black'
   gFontFamily = 'impact'
   gTextAlign = 'center'
-  setMeme(elImg, imgId)
-  initCanvas()
+  setMeme(elImg, imgId, isSaved, memeIdx)
+  initCanvas(isSaved, isSaved)
 
   const meme = getGmeme()
   document.querySelector('.meme-text-input').value =
@@ -120,5 +120,6 @@ function onMoveText(isUp) {
 }
 
 function onSaveMeme() {
+  renderMeme(false)
   saveMeme()
 }

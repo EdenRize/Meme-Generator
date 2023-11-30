@@ -139,7 +139,7 @@ function saveMeme() {
 
   gMeme.display = gElCanvas.toDataURL()
 
-  memes.push(gMeme)
+  memes.unshift(gMeme)
   saveToStorage('savedMemes', memes)
   gMeme.elImg = currElImg
 }

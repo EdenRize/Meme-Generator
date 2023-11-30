@@ -1,9 +1,9 @@
 .editor-container {
   position: fixed;
-  top: 56px;
+  top: 49px;
   left: 0;
   width: 100%;
-  height: calc(100vh - 55px);
+  height: calc(100vh - 49px);
   box-sizing: border-box;
   padding-block: 10px;
   overflow-y: auto;

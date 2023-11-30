@@ -204,6 +204,12 @@ function renderImg(img) {
 }
 
 function coverCanvasWithImg(elImg) {
+  if (elImg.naturalHeight === 0) {
+    elImg.onload = function () {
+      renderMeme()
+    }
+    return
+  }
   gElCanvas.height =
     (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)

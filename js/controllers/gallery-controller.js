@@ -6,3 +6,9 @@ function onOpenEditor(elImg) {
   initEditor(elImg, imgId)
   document.body.style.overflowY = 'hidden'
 }
+
+function onRandomMeme() {
+  const elImges = document.querySelectorAll('.meme-img')
+  const elImg = elImges[getRandomInt(0, elImges.length)]
+  onOpenEditor(elImg)
+}

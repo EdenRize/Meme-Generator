@@ -118,3 +118,7 @@ function onMoveText(isUp) {
   setGmemeLineProp('y', posY)
   renderMeme(true)
 }
+
+function onSaveMeme() {
+  saveMeme()
+}

@@ -13,6 +13,24 @@
   <body onload="onInit()">
     <header>
       <h1>Meme Generator</h1>
+
+      <nav onclick="event.stopPropagation()" role="navigation">
+        <div id="menuToggle">
+          <input type="checkbox" />
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <ul id="menu">
+            <a onclick="onRenderPage('gallery')" href="#"><li>Gallery</li></a>
+            <a onclick="onRenderPage('saved memes')" href="#"
+              ><li>Saved Memes</li></a
+            >
+            <a onclick="onRenderPage('about')" href="#"><li>About</li></a>
+          </ul>
+        </div>
+      </nav>
     </header>
 
     <main>
@@ -137,13 +155,20 @@
             ></i>
           </div>
         </div>
+
         <div class="export-container">
           <a href="#" onclick="downloadCanvas(this)" download="file-name"
             ><img
-              class="download-btn pointer btn-hover"
+              class="pointer btn-hover"
               src="./img/assets/download.svg"
               title="Download Img"
           /></a>
+
+          <img
+            onclick="onSaveMeme()"
+            class="pointer btn-hover"
+            src="./img/assets/save.svg"
+          />
         </div>
       </section>
     </main>

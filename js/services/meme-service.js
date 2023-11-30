@@ -115,3 +115,36 @@ function deleteLine() {
   gMeme.lines.splice(lineIdx, 1)
   gMeme.selectedLineIdx = 0
 }
+
+function saveMeme() {
+  var memes = getFromStorage('savedMemes')
+  if (!memes || !memes.length) memes = []
+  gMeme.fontFamily = gFontFamily
+  gMeme.textAlign = gTextAlign
+  const currElImg = gMeme.elImg
+  gMeme.elImg = {
+    src: gMeme.elImg.src,
+    width: gMeme.elImg.width,
+    height: gMeme.elImg.height,
+  }
+
+  memes.push(gMeme)
+  saveToStorage('savedMemes', memes)
+  gMeme.elImg = currElImg
+}
+
+function getSavedMemes() {
+  var memes = getFromStorage('savedMemes')
+  if (!memes || !memes.length) return null
+
+  // recreating imges
+  memes.map((meme) => {
+    const recreatedImage = new Image()
+    recreatedImage.src = meme.elImg.src
+    recreatedImage.width = meme.elImg.width
+    recreatedImage.height = meme.elImg.height
+    meme.elImg = recreatedImage
+  })
+
+  return memes
+}

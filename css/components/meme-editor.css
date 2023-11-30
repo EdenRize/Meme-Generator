@@ -36,12 +36,14 @@ canvas {
 }
 
 .export-container {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  text-align: center;
 }
 
-.editor-container .download-btn {
+.export-container * {
+  margin-inline: 10px;
+}
+
+.export-container img {
   width: 30px;
   transition: 0.2s;
 }
@@ -100,6 +102,7 @@ canvas {
 
   background-color: #00a5af;
   margin: auto;
+  margin-block-end: 35px;
   padding: 10px;
   border-radius: 10px;
 }

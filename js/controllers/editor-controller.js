@@ -114,7 +114,6 @@ function onMoveText(isUp) {
   if (!meme.lines.length) return
 
   const diff = isUp ? -3 : 3
-  console.log('diff', diff)
   const posY = meme.lines[meme.selectedLineIdx].y + diff
   setGmemeLineProp('y', posY)
   renderMeme(true)

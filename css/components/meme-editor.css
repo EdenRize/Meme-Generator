@@ -96,6 +96,7 @@ canvas {
 
 .text-edit-container {
   width: 80%;
+  max-width: 500px;
 
   background-color: #00a5af;
   margin: auto;

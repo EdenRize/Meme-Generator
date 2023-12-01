@@ -18,3 +18,10 @@ function onRandomMeme() {
   const elImg = elImges[getRandomInt(0, elImges.length)]
   onOpenEditor(elImg)
 }
+
+function onSetFilter(filter) {
+  setFilterBy(filter)
+  document.querySelector('.memes-container').innerHTML = getHTMLGalleryMemes(
+    getGimges()
+  )
+}

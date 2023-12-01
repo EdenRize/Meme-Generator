@@ -23,3 +23,33 @@
 .gallery-container button:hover {
   scale: 1.02;
 }
+
+.search-form {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-block-end: 10px;
+}
+
+.search-input {
+  width: 100%;
+
+  padding: 10px 15px;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: var(--dark-color1);
+  color: #00b48e;
+  border: unset;
+  border-radius: 10px;
+}
+
+.search-input:focus {
+  outline-color: #00b48e;
+}
+
+.search-form img {
+  position: absolute;
+  right: 10px;
+  width: 25px;
+}

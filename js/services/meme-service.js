@@ -47,9 +47,20 @@ var gImgs = [
 ]
 var gMeme = {}
 var gKeywordSearchCountMap = { funny: 12, animal: 16, baby: 2 }
+var gFilterBy = ''
 
 function getGimges() {
-  return gImgs
+  const imgs = gImgs.filter((img) => {
+    return img.keywords.find((keyword) =>
+      keyword.includes(gFilterBy.toLocaleLowerCase())
+    )
+  })
+
+  return imgs
+}
+
+function setFilterBy(filter) {
+  gFilterBy = filter
 }
 
 function getImg(imgId) {

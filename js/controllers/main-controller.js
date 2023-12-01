@@ -24,11 +24,35 @@ function renderGallery() {
   const imges = getGimges()
   var strHTML = `
   <section class="gallery-container">
+
+  <form class="search-form">
+  <input
+  class="search-input"
+  placeholder="Search"
+  oninput="onSetFilter(this.value)"
+  />
+  <img src="./img/assets/search.svg" />
+  </form>
+
   <button onclick="onRandomMeme()">
   <p>I'm Flexible</p>
   </button>
+
   <div class="memes-container">
   `
+
+  strHTML += getHTMLGalleryMemes(imges)
+
+  strHTML += `
+  </div>
+  </section>
+  `
+
+  document.querySelector('.page-content').innerHTML = strHTML
+}
+
+function getHTMLGalleryMemes(imges) {
+  var strHTML = ''
 
   imges.map((img) => {
     strHTML += `
@@ -42,12 +66,7 @@ function renderGallery() {
     `
   })
 
-  strHTML += `
-  </div>
-  </section>
-  `
-
-  document.querySelector('.page-content').innerHTML = strHTML
+  return strHTML
 }
 
 function renderSavedMemes() {

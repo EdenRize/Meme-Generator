@@ -51,7 +51,7 @@ button {
 
   padding: 20px;
   border-radius: 10px;
-  background-color: #22252c;
+  background-color: var(--dark-color1);
   color: #00b48e;
   z-index: 30;
   transition: 0.3s ease-in-out;

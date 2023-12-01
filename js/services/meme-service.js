@@ -13,13 +13,9 @@ var gFilterBy = ''
 initGimgs()
 
 function initGimgs() {
-  var imgs = getFromStorage('imgs')
-  if (!imgs || !imgs.length) {
-    imgs = createImgs()
-    saveToStorage('imgs', imgs)
-  }
-
-  gImgs = imgs
+  gImgs = createImgs()
+  const userImgs = getFromStorage('user-imgs')
+  if (userImgs && userImgs.length) gImgs.push(...userImgs)
 }
 
 function createImgs() {
@@ -108,7 +104,6 @@ function setMeme(elImg, imgId, isSaved, memeIdx) {
   if (isSaved) {
     gMeme = getFromStorage('savedMemes')[memeIdx]
     gMeme.elImg = recreateImg(gMeme.elImg)
-    console.log('imgId', imgId)
     gMeme.elImg.src = JSON.parse(JSON.stringify(getImg(imgId).url))
     return
   }
@@ -193,8 +188,10 @@ function saveMeme(savedMemeIdx) {
   gMeme.display = gElCanvas.toDataURL()
 
   if (typeof savedMemeIdx === 'number') {
+    console.log('savedMemeIdx', savedMemeIdx)
     memes.splice(savedMemeIdx, 1, gMeme)
   } else {
+    console.log('memes', memes)
     memes.unshift(gMeme)
   }
   saveToStorage('savedMemes', memes)
@@ -223,12 +220,18 @@ function recreateImg(elImg) {
 
 function addImg(elImg) {
   const id = +makeId(6)
-  gImgs.push({
+  const img = {
     id,
     url: elImg.src,
-  })
+  }
+  gImgs.push(img)
 
-  saveToStorage('imgs', gImgs)
+  var userImgs = getFromStorage('user-imgs')
+  if (!userImgs || !userImgs.length) userImgs = []
+  userImgs.unshift(img)
+  console.log('userImgs', userImgs)
 
-  return id
+  saveToStorage('user-imgs', userImgs)
+
+  return { id, imgIdx: gImgs.length - 1 }
 }

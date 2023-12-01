@@ -23,8 +23,9 @@ function onSetFilter(filter) {
   setFilterBy(filter)
   const elMemeContainer = document.querySelector('.memes-container')
 
-  if (elMemeContainer)
+  if (elMemeContainer) {
     elMemeContainer.innerHTML = getHTMLGalleryMemes(getGimges())
+  }
 }
 
 function onImgInput(ev) {
@@ -45,7 +46,8 @@ function loadImageFromInput(ev, onImageReady) {
 
 function onUserImgReady(img) {
   const elImg = recreateImg(img)
-  const imgId = addImg(elImg)
+  const addedImgInfo = addImg(elImg)
+  const imgId = addedImgInfo.id
   elImg.dataset.imgId = imgId
-  onOpenEditor(elImg)
+  onOpenEditor(elImg, false)
 }

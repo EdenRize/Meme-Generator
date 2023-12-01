@@ -53,7 +53,7 @@ function renderGallery() {
   <div class="memes-container">
   <input
   type="file"
-  class="user-upload"
+  class="user-upload pointer"
   onchange="onImgInput(event)"
   accept="image/*"
   />

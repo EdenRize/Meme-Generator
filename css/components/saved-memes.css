@@ -5,3 +5,8 @@
 .saved-memes-container h2 {
   text-align: center;
 }
+
+.saved-memes-container p {
+  margin-block-start: 40px;
+  text-align: center;
+}

@@ -148,8 +148,10 @@ function downloadCanvas(elLink) {
 
 //listeners
 function addListeners() {
+  console.log('adding listeners')
   addMouseListeners()
   addTouchListeners()
+
   //Listen for resize ev
   window.addEventListener('resize', () => {
     initCanvas(false, gIsSaved)

@@ -49,7 +49,6 @@ function makeId(length = 6) {
     txt += possible.charAt(Math.floor(Math.random() * possible.length))
   }
 
-  console.log(txt)
   return txt
 }
 

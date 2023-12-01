@@ -12,7 +12,7 @@ function initEditor(elImg, imgId, isSaved, memeIdx) {
   gTextAlign = 'center'
 
   setMeme(elImg, imgId, isSaved, memeIdx)
-  initCanvas(isSaved, isSaved)
+  initCanvas(true, isSaved)
   renderImojis()
 
   const meme = getGmeme()
@@ -152,6 +152,8 @@ function onMoveText(isUp) {
 function onSaveMeme() {
   renderMeme(false)
   saveMeme(savedMemeIdx)
-  if (typeof savedMemeIdx === 'number') renderSavedMemes()
+  renderSavedMemes()
+  setCurrPage('saved memes')
   showUserModal('Meme saved!')
+  onCloseEditor()
 }

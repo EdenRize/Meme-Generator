@@ -44,6 +44,10 @@
   border-radius: 10px;
 }
 
+.search-input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
 .search-input:focus {
   outline-color: #00b48e;
 }

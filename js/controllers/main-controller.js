@@ -27,12 +27,24 @@ function renderGallery() {
 
   <form class="search-form">
   <input
-  class="search-input"
-  placeholder="Search"
   oninput="onSetFilter(this.value)"
-  />
+  class="search-input"
+  list="search-memes-list"
+  placeholder="Search" />
   <img src="./img/assets/search.svg" />
   </form>
+
+  <datalist id="search-memes-list" >
+  <option value="Happy">Happy</option>
+  <option value="Funny">Funny</option>
+  <option value="Cute">Cute</option>
+  <option value="Mad">Mad</option>
+  <option value="Smile">Smile</option>
+  <option value="Men">Men</option>
+  <option value="Women">Women</option>
+  <option value="Baby">Baby</option>
+  <option value="Animal">Animal</option>
+  </datalist>
 
   <button onclick="onRandomMeme()">
   <p>I'm Flexible</p>
@@ -109,6 +121,7 @@ function onRenderPage(pageName) {
   closeMenu()
   onCloseEditor()
   if (getCurrPage() === pageName) return
+  onSetFilter('')
   setCurrPage(pageName)
   renderPage()
 }

@@ -27,7 +27,7 @@ function onTextChange(ev) {
 }
 
 function onCloseEditor() {
-  document.querySelector('.editor-container').hidden = true
+  document.querySelector('.editor-container').classList.remove('opened-editor')
   document.body.style.overflowY = 'scroll'
 }
 

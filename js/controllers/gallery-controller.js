@@ -1,7 +1,7 @@
 function onOpenEditor(elImg, isSaved, memeIdx) {
   const imgId = elImg.dataset.imgId
   const elEditor = document.querySelector('.editor-container')
-  elEditor.hidden = false
+  elEditor.classList.add('opened-editor')
   elEditor.dataset.imgId = imgId
   const img = getImg(imgId)
   if (isSaved) {

@@ -38,7 +38,27 @@
     width: 950px;
   }
 
+  .opened-editor {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 20px;
+
+    padding-inline: 50px;
+  }
+
+  .editor-container .close-btn {
+    top: 10px;
+  }
+
   .canvas-container {
     width: 600px;
+    margin: unset;
+    justify-self: center;
+  }
+
+  .text-edit-container {
+    width: unset;
+    max-width: 500px;
   }
 }

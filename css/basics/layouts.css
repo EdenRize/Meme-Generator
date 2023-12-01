@@ -14,3 +14,8 @@
 .font-family-select {
   grid-area: 2 / 1 / span 1 / span 3;
 }
+
+.emojis-container {
+  display: grid;
+  grid-auto-flow: column;
+}

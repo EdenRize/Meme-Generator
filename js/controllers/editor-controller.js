@@ -10,13 +10,41 @@ function initEditor(elImg, imgId, isSaved, memeIdx) {
   gStroke = 'black'
   gFontFamily = 'impact'
   gTextAlign = 'center'
+
   setMeme(elImg, imgId, isSaved, memeIdx)
   initCanvas(isSaved, isSaved)
+  renderImojis()
 
   const meme = getGmeme()
   document.querySelector('.meme-text-input').value =
     meme.lines[meme.selectedLineIdx].txt
   savedMemeIdx = memeIdx
+}
+
+function renderImojis() {
+  const emojis = getImojis()
+  var strHTML = ''
+
+  emojis.map((emoji) => {
+    strHTML += `
+    <button
+    onclick="  addLine(
+      '${emoji.emojiTxt}',
+      gColor,
+      gStroke,
+      gElCanvas.width / 2,
+      gElCanvas.height / 2,
+      gSize
+    )
+    renderMeme(true)"
+    class="emoji-btn btn-hover pointer"
+    >
+    ${emoji.emojiTxt}
+    </button>
+    `
+  })
+
+  document.querySelector('.emojis-container').innerHTML = strHTML
 }
 
 function onTextChange(ev) {

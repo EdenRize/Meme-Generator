@@ -17,7 +17,7 @@
 }
 
 .canvas-container {
-  width: 95%;
+  width: 75%;
   margin: 40px auto;
   background-color: #00a5af;
 }
@@ -107,7 +107,7 @@ canvas {
 
   background-color: #00a5af;
   margin: auto;
-  margin-block-end: 35px;
+  margin-block-end: 17px;
   padding: 10px;
   border-radius: 10px;
 }
@@ -120,7 +120,7 @@ canvas {
 .meme-text-container {
   width: 100%;
   text-align: center;
-  margin-block-end: 15px;
+  margin-block-end: 25px;
 }
 
 .meme-text-input {
@@ -132,7 +132,7 @@ canvas {
 }
 
 .text-change-container {
-  margin-block-end: 35px;
+  margin-block-end: 25px;
   text-align: center;
 }
 
@@ -155,4 +155,24 @@ canvas {
 
 .text-change-container * {
   transition: 0.2s;
+}
+
+.emojis-container {
+  width: 80%;
+  max-width: 500px;
+  margin: auto;
+  margin-block-end: 15px;
+  padding: 15px;
+
+  background-color: var(--dark-color1);
+  border-radius: 10px;
+}
+
+.emoji-btn {
+  width: fit-content;
+  justify-self: center;
+  font-size: 1.6em;
+
+  background-color: transparent;
+  border: unset;
 }

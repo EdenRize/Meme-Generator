@@ -21,7 +21,31 @@ function onRandomMeme() {
 
 function onSetFilter(filter) {
   setFilterBy(filter)
-  document.querySelector('.memes-container').innerHTML = getHTMLGalleryMemes(
-    getGimges()
-  )
+  const elMemeContainer = document.querySelector('.memes-container')
+
+  if (elMemeContainer)
+    elMemeContainer.innerHTML = getHTMLGalleryMemes(getGimges())
+}
+
+function onImgInput(ev) {
+  loadImageFromInput(ev, onUserImgReady)
+}
+
+// Read the file from the input
+// When done send the image to the callback function
+function loadImageFromInput(ev, onImageReady) {
+  const reader = new FileReader()
+  reader.onload = function (event) {
+    let img = new Image()
+    img.src = event.target.result
+    img.onload = () => onImageReady(img)
+  }
+  reader.readAsDataURL(ev.target.files[0])
+}
+
+function onUserImgReady(img) {
+  const elImg = recreateImg(img)
+  const imgId = addImg(elImg)
+  elImg.dataset.imgId = imgId
+  onOpenEditor(elImg)
 }

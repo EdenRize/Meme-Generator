@@ -51,6 +51,12 @@ function renderGallery() {
   </button>
 
   <div class="memes-container">
+  <input
+  type="file"
+  class="user-upload"
+  onchange="onImgInput(event)"
+  accept="image/*"
+  />
   `
 
   strHTML += getHTMLGalleryMemes(imges)
@@ -67,15 +73,17 @@ function getHTMLGalleryMemes(imges) {
   var strHTML = ''
 
   imges.map((img) => {
-    strHTML += `
-    <div 
-    class="meme-card pointer">
+    if (img.keywords.length) {
+      strHTML += `
+      <div 
+      class="meme-card pointer">
       <img
       onclick="onOpenEditor(this)"
       data-img-id="${img.id}"
-       class="meme-img" src="${img.url}" />
-    </div>
-    `
+      class="meme-img" src="${img.url}" />
+      </div>
+      `
+    }
   })
 
   return strHTML

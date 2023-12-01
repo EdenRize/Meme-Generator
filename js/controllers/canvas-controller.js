@@ -1,5 +1,6 @@
 let gElCanvas
 let gCtx
+let gIsSaved
 let gPrevCanvasWidth = 0
 let gWidthDiff = 0
 let gStartPos = null
@@ -11,6 +12,7 @@ function initCanvas(isRefresh = true, isSaved = false) {
   gCtx = gElCanvas.getContext('2d')
   gCtx.strokeStyle = 'black'
   gCtx.fillStyle = 'white'
+  gIsSaved = isSaved
 
   resizeCanvas()
   if (isRefresh) addListeners()
@@ -141,6 +143,7 @@ function downloadCanvas(elLink) {
   elLink.href = dataUrl
   // Set a name for the downloaded file
   elLink.download = 'my-img'
+  showUserModal('Meme downloaded!')
 }
 
 //listeners
@@ -149,7 +152,7 @@ function addListeners() {
   addTouchListeners()
   //Listen for resize ev
   window.addEventListener('resize', () => {
-    initCanvas(false)
+    initCanvas(false, gIsSaved)
     // renderMeme()
   })
 }

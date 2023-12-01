@@ -123,7 +123,7 @@ function deleteLine() {
   gMeme.selectedLineIdx = 0
 }
 
-function saveMeme() {
+function saveMeme(savedMemeIdx) {
   var memes = getFromStorage('savedMemes')
   if (!memes || !memes.length) memes = []
 
@@ -136,10 +136,18 @@ function saveMeme() {
     width: gMeme.elImg.width,
     height: gMeme.elImg.height,
   }
+  console.log('gMeme.elImg', gMeme.elImg)
 
   gMeme.display = gElCanvas.toDataURL()
 
-  memes.unshift(gMeme)
+  if (typeof savedMemeIdx === 'number') {
+    console.log('savedMemeIdx', savedMemeIdx)
+    memes.splice(savedMemeIdx, 1, gMeme)
+  } else {
+    console.log('normal meme')
+    memes.unshift(gMeme)
+  }
+  console.log('memes', memes)
   saveToStorage('savedMemes', memes)
   gMeme.elImg = currElImg
 }

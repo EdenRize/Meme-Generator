@@ -17,7 +17,6 @@ function initEditor(elImg, imgId, isSaved, memeIdx) {
   document.querySelector('.meme-text-input').value =
     meme.lines[meme.selectedLineIdx].txt
   savedMemeIdx = memeIdx
-  console.log('savedMemeIdx', savedMemeIdx)
 }
 
 function onTextChange(ev) {
@@ -124,5 +123,7 @@ function onMoveText(isUp) {
 
 function onSaveMeme() {
   renderMeme(false)
-  saveMeme()
+  saveMeme(savedMemeIdx)
+  if (typeof savedMemeIdx === 'number') renderSavedMemes()
+  showUserModal('Meme saved!')
 }

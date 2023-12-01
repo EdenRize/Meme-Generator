@@ -43,3 +43,16 @@ button {
   object-fit: cover;
   border-radius: 10px;
 }
+
+.user-modal-container {
+  position: fixed;
+  right: 10px;
+  bottom: -100px;
+
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #22252c;
+  color: #00b48e;
+  z-index: 30;
+  transition: 0.3s ease-in-out;
+}

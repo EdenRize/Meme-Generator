@@ -101,3 +101,14 @@ function closeMenu() {
     menuCheckbox.checked = false
   }
 }
+
+function showUserModal(msg) {
+  const elModal = document.querySelector('.user-modal-container')
+
+  elModal.querySelector('.user-msg').innerText = msg
+  elModal.style.bottom = '10px'
+
+  setTimeout(() => {
+    elModal.style.bottom = '-100px'
+  }, 3000)
+}

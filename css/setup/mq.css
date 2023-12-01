@@ -20,6 +20,7 @@
 
   main {
     width: 750px;
+    min-height: calc(100vh - 67.5px - 43.5px - 15px - 31.6px);
   }
 
   .memes-container {

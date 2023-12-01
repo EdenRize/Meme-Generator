@@ -10,6 +10,7 @@ function onOpenEditor(elImg, isSaved, memeIdx) {
   }
   initEditor(elImg, imgId, isSaved, memeIdx)
   document.body.style.overflowY = 'hidden'
+  closeMenu()
 }
 
 function onRandomMeme() {

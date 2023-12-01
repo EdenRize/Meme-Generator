@@ -3,6 +3,7 @@ var gStroke
 var gSize
 var gFontFamily
 var gTextAlign
+var savedMemeIdx
 
 function initEditor(elImg, imgId, isSaved, memeIdx) {
   gColor = 'white'
@@ -15,6 +16,8 @@ function initEditor(elImg, imgId, isSaved, memeIdx) {
   const meme = getGmeme()
   document.querySelector('.meme-text-input').value =
     meme.lines[meme.selectedLineIdx].txt
+  savedMemeIdx = memeIdx
+  console.log('savedMemeIdx', savedMemeIdx)
 }
 
 function onTextChange(ev) {

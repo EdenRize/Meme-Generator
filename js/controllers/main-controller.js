@@ -15,6 +15,10 @@ function renderPage() {
       renderSavedMemes()
       break
 
+    case 'about':
+      renderAboutPage()
+      break
+
     default:
       break
   }
@@ -83,7 +87,7 @@ function getHTMLGalleryMemes(imges) {
       <div 
       class="meme-card pointer">
       <img
-      onclick="onOpenEditor(this)"
+      onclick="onOpenEditor(false, this)"
       data-img-id="${img.id}"
       class="meme-img" src="${img.url}" />
       </div>
@@ -114,7 +118,7 @@ function renderSavedMemes() {
       <div 
     class="meme-card pointer">
       <img
-      onclick="onOpenEditor(this, true, ${idx})"
+      onclick="onOpenEditor(false, this, true, ${idx})"
       data-img-id="${meme.selectedImgId}"
        class="meme-img" src="${meme.display}" />
     </div>
@@ -128,6 +132,24 @@ function renderSavedMemes() {
   `
 
   document.querySelector('.page-content').innerHTML = strHTML
+}
+
+function renderAboutPage() {
+  document.querySelector('.page-content').innerHTML = `
+  <section class="about-container">
+  <h2>Welcome To My Meme Generator!</h2>
+  <p class="info-paragraph">
+  As a part of my Bootcamp studies in "Coding Academy", 
+  we where given the task to create our own meme generator from scratch. 
+  This entire site was made with vanilla JS, HTML & CSS, and created by me, Eden Rize. 
+  Thank you for supporting my meme generator! <span>❤</span>
+  </p>
+  <p>
+  And now, a picture of me and my cat:
+  </p>
+  <img src="./img/assets/tim.jpg" />
+  </section>
+  `
 }
 
 function getUploadHTML() {
@@ -149,12 +171,13 @@ function getUploadHTML() {
 }
 
 function renderKeywords() {
-  document.querySelector('.search-keywords-container').innerHTML = getKeywords()
+  const elKeywords = document.querySelector('.search-keywords-container')
+  if (elKeywords) elKeywords.innerHTML = getKeywords()
 }
 
 function getKeywords() {
   const words = getBestKeywords()
-  const maxSize = window.screen.width < 500 ? 19 : 23
+  const maxSize = window.innerWidth < 500 ? 17 : 23
   var strHTML = ''
   words.map((word) => {
     strHTML += `

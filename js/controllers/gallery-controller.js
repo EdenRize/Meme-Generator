@@ -1,4 +1,10 @@
-function onOpenEditor(elImg, isSaved, memeIdx) {
+addResizeListner()
+
+function addResizeListner() {
+  window.addEventListener('resize', renderKeywords)
+}
+
+function onOpenEditor(isRandom, elImg, isSaved, memeIdx) {
   const imgId = elImg.dataset.imgId
   const elEditor = document.querySelector('.editor-container')
   elEditor.classList.add('opened-editor')
@@ -8,7 +14,7 @@ function onOpenEditor(elImg, isSaved, memeIdx) {
     // elImg = new Image()
     // elImg.src = img.url
   }
-  initEditor(elImg, imgId, isSaved, memeIdx)
+  initEditor(isRandom, elImg, imgId, isSaved, memeIdx)
   document.body.style.overflowY = 'hidden'
   closeMenu()
 }
@@ -16,7 +22,7 @@ function onOpenEditor(elImg, isSaved, memeIdx) {
 function onRandomMeme() {
   const elImges = document.querySelectorAll('.meme-img')
   const elImg = elImges[getRandomInt(0, elImges.length)]
-  onOpenEditor(elImg)
+  onOpenEditor(true, elImg)
 }
 
 function onSetFilter(filter) {
@@ -53,5 +59,5 @@ function onUserImgReady(img) {
   const addedImgInfo = addImg(elImg)
   const imgId = addedImgInfo.id
   elImg.dataset.imgId = imgId
-  onOpenEditor(elImg, false)
+  onOpenEditor(false, elImg, false)
 }

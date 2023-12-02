@@ -5,14 +5,14 @@ var gFontFamily
 var gTextAlign
 var savedMemeIdx
 
-function initEditor(elImg, imgId, isSaved, memeIdx) {
+function initEditor(isRandom, elImg, imgId, isSaved, memeIdx) {
   gColor = 'white'
   gStroke = 'black'
   gFontFamily = 'impact'
   gTextAlign = 'center'
 
-  setMeme(elImg, imgId, isSaved, memeIdx)
-  initCanvas(true, isSaved)
+  setMeme(isRandom, elImg, imgId, isSaved, memeIdx)
+  initCanvas(isRandom, true, isSaved)
   renderImojis()
 
   const meme = getGmeme()

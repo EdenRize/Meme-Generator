@@ -5,14 +5,16 @@ let gPrevCanvasWidth = 0
 let gWidthDiff = 0
 let gStartPos = null
 let gDraggedLine = null
+let gIsRandom
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
-function initCanvas(isRefresh = true, isSaved = false) {
+function initCanvas(isRandom, isRefresh = true, isSaved = false) {
   gElCanvas = document.querySelector('canvas')
   gCtx = gElCanvas.getContext('2d')
   gCtx.strokeStyle = 'black'
   gCtx.fillStyle = 'white'
   gIsSaved = isSaved
+  gIsRandom = isRandom
 
   resizeCanvas()
   if (isRefresh) addListeners()
@@ -22,6 +24,7 @@ function initCanvas(isRefresh = true, isSaved = false) {
 
 function setInitLines() {
   setGmemeLineProp('x', gElCanvas.width / 2, 0)
+  if (gIsRandom) return
   setGmemeLineProp('x', gElCanvas.width / 2, 1)
   setGmemeLineProp('y', gElCanvas.height - 40, 1)
 }
@@ -148,13 +151,12 @@ function downloadCanvas(elLink) {
 
 //listeners
 function addListeners() {
-  console.log('adding listeners')
   addMouseListeners()
   addTouchListeners()
 
   //Listen for resize ev
   window.addEventListener('resize', () => {
-    initCanvas(false, gIsSaved)
+    initCanvas(gIsRandom, false, gIsSaved)
     // renderMeme()
   })
 }

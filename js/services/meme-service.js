@@ -1,10 +1,16 @@
 var gImgs
-var gEmojis = [
+const gEmojis = [
   { emojiTxt: '😀', idx: 0 },
   { emojiTxt: '😂', idx: 1 },
   { emojiTxt: '😏', idx: 2 },
   { emojiTxt: '😈', idx: 3 },
   { emojiTxt: '😉', idx: 4 },
+]
+const gRandomLines = [
+  'Sprint 2 be like',
+  'When the code works',
+  'When I meet Puki',
+  'When Asi likes my Answer',
 ]
 var gMeme = {}
 var gKeywordSearchCountMap
@@ -117,7 +123,7 @@ function getImg(imgId) {
   return gImgs.find((img) => img.id === +imgId)
 }
 
-function setMeme(elImg, imgId, isSaved, memeIdx) {
+function setMeme(isRandom, elImg, imgId, isSaved, memeIdx) {
   if (isSaved) {
     gMeme = getFromStorage('savedMemes')[memeIdx]
     gMeme.elImg = recreateImg(gMeme.elImg)
@@ -128,8 +134,19 @@ function setMeme(elImg, imgId, isSaved, memeIdx) {
   gMeme.elImg = elImg
   gMeme.selectedImgId = gImgs.find((img) => img.id === +imgId).id
   gMeme.lines = []
-  addLine('I sometimes eat Falafel', 'white', 'black', 170, 40, 25)
-  addLine('And I like it', 'white', 'black', 170, 40, 25)
+  if (isRandom)
+    addLine(
+      gRandomLines[getRandomInt(0, gRandomLines.length)],
+      'white',
+      'black',
+      170,
+      40,
+      25
+    )
+  else {
+    addLine('I sometimes eat Falafel', 'white', 'black', 170, 40, 25)
+    addLine('And I like it', 'white', 'black', 170, 40, 25)
+  }
   gMeme.selectedLineIdx = 0
 }
 
@@ -204,13 +221,9 @@ function saveMeme(savedMemeIdx) {
 
   gMeme.display = gElCanvas.toDataURL()
 
-  if (typeof savedMemeIdx === 'number') {
-    console.log('savedMemeIdx', savedMemeIdx)
-    memes.splice(savedMemeIdx, 1, gMeme)
-  } else {
-    console.log('memes', memes)
-    memes.unshift(gMeme)
-  }
+  if (typeof savedMemeIdx === 'number') memes.splice(savedMemeIdx, 1, gMeme)
+  else memes.unshift(gMeme)
+
   saveToStorage('savedMemes', memes)
   gMeme.elImg = currElImg
 }

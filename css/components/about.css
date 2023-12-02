@@ -1,0 +1,28 @@
+.about-container {
+  text-align: center;
+  margin-inline: 15px;
+}
+
+.about-container h2 {
+  margin-block-end: 35px;
+}
+
+.about-container p {
+  max-width: 400px;
+  margin: auto;
+  margin-block-end: 30px;
+
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 1.5em;
+  -webkit-text-stroke-width: 0;
+}
+
+.info-paragraph span {
+  color: #00b48e;
+}
+
+.about-container img {
+  width: 85%;
+  max-width: 370px;
+  border-radius: 10px;
+}

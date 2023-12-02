@@ -61,4 +61,8 @@
     width: unset;
     max-width: 500px;
   }
+
+  .emoji-btn {
+    font-size: 1.5em;
+  }
 }

@@ -171,6 +171,10 @@
     justify-self: center;
   }
 
+  .meme-text-container input {
+    font-size: 1em;
+  }
+
   .text-edit-container {
     width: unset;
     max-width: 500px;

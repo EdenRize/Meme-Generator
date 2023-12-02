@@ -186,7 +186,7 @@ function getKeywords() {
       10 + word.usage > maxSize ? maxSize : 10 + word.usage
     }px;"
     onclick="onSetFilter('${word.keyword}')"
-    class="pointer"
+    class="pointer keyword"
     >
     ${word.keyword}
     </p>

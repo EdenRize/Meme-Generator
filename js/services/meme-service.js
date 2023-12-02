@@ -7,15 +7,31 @@ var gEmojis = [
   { emojiTxt: '😉', idx: 4 },
 ]
 var gMeme = {}
-var gKeywordSearchCountMap = { funny: 12, animal: 16, baby: 2 }
+var gKeywordSearchCountMap
 var gFilterBy = ''
 
 initGimgs()
+initKeywords()
 
 function initGimgs() {
   gImgs = createImgs()
   const userImgs = getFromStorage('user-imgs')
   if (userImgs && userImgs.length) gImgs.push(...userImgs)
+}
+
+function initKeywords() {
+  gKeywordSearchCountMap = getFromStorage('keywords')
+  if (!gKeywordSearchCountMap) {
+    gKeywordSearchCountMap = {
+      Funny: 7,
+      Animal: 16,
+      Baby: 2,
+      Happy: 10,
+      Women: 1,
+    }
+  }
+
+  saveToStorage('keywords', gKeywordSearchCountMap)
 }
 
 function createImgs() {
@@ -94,6 +110,7 @@ function getGimges() {
 
 function setFilterBy(filter) {
   gFilterBy = filter
+  updateKeywords(filter)
 }
 
 function getImg(imgId) {
@@ -234,4 +251,18 @@ function addImg(elImg) {
   saveToStorage('user-imgs', userImgs)
 
   return { id, imgIdx: gImgs.length - 1 }
+}
+
+function updateKeywords(word) {
+  if (word === '') return
+  if (gKeywordSearchCountMap[word]) gKeywordSearchCountMap[word]++
+  saveToStorage('keywords', gKeywordSearchCountMap)
+}
+
+function getBestKeywords() {
+  const entries = Object.entries(gKeywordSearchCountMap)
+  return entries.map((entry) => ({
+    keyword: entry[0],
+    usage: entry[1],
+  }))
 }

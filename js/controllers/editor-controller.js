@@ -57,29 +57,33 @@ function onTextChange(ev) {
 function onCloseEditor() {
   document.querySelector('.editor-container').classList.remove('opened-editor')
   document.body.style.overflowY = 'scroll'
-}
-
-function activatePicker(selector) {
-  document.querySelector(selector).click()
+  changeColor('white')
+  changeStroke('black')
 }
 
 function onColorChange(elInput) {
   const color = elInput.value
-  document.querySelector('.fa-palette').style.color = color
+  changeColor(color)
 
   setGmemeLineProp('color', color)
   renderMeme(true)
-
-  gColor = color
 }
 
 function onStrokeChange(elInput) {
   const strokeColor = elInput.value
-  document.querySelector('.fa-underline').style.color = strokeColor
+  changeStroke(strokeColor)
 
   setGmemeLineProp('stroke', strokeColor)
   renderMeme(true)
+}
 
+function changeColor(color) {
+  document.querySelector('.fa-palette').style.color = color
+  gColor = color
+}
+
+function changeStroke(strokeColor) {
+  document.querySelector('.fa-underline').style.color = strokeColor
   gStroke = strokeColor
 }
 

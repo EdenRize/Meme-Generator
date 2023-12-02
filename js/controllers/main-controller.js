@@ -25,7 +25,10 @@ function renderGallery() {
   var strHTML = `
   <section class="gallery-container">
 
-  <form class="search-form">
+  <form 
+  onsubmit="event.preventDefault()"
+  class="search-form"
+  >
   <input
   oninput="onSetFilter(this.value)"
   class="search-input"
@@ -33,6 +36,12 @@ function renderGallery() {
   placeholder="Search" />
   <img src="./img/assets/search.svg" />
   </form>
+
+  <div
+  class="search-keywords-container"
+  >
+  ${getKeywords()}
+  </div>
 
   <datalist id="search-memes-list" >
   <option value="Happy">Happy</option>
@@ -51,12 +60,7 @@ function renderGallery() {
   </button>
 
   <div class="memes-container">
-  <input
-  type="file"
-  class="user-upload pointer"
-  onchange="onImgInput(event)"
-  accept="image/*"
-  />
+  ${getUploadHTML()}
   `
 
   strHTML += getHTMLGalleryMemes(imges)
@@ -70,6 +74,7 @@ function renderGallery() {
 }
 
 function getHTMLGalleryMemes(imges) {
+  if (!imges.length) return `<p>No memes found</p>`
   var strHTML = ''
 
   imges.map((img) => {
@@ -125,6 +130,49 @@ function renderSavedMemes() {
   document.querySelector('.page-content').innerHTML = strHTML
 }
 
+function getUploadHTML() {
+  return `
+  <div
+  onclick="activatePicker('.user-upload')"
+  class="user-upload-container meme-card pointer"
+  >
+  <input
+  hidden
+  type="file"
+  class="user-upload"
+  onchange="onImgInput(event)"
+  accept="image/*"
+  />
+  <img src="./img/assets/upload.svg" />
+  </div>
+  `
+}
+
+function renderKeywords() {
+  document.querySelector('.search-keywords-container').innerHTML = getKeywords()
+}
+
+function getKeywords() {
+  const words = getBestKeywords()
+  const maxSize = window.screen.width < 500 ? 19 : 23
+  var strHTML = ''
+  words.map((word) => {
+    strHTML += `
+    <p 
+    style="font-size: ${
+      10 + word.usage > maxSize ? maxSize : 10 + word.usage
+    }px;"
+    onclick="onSetFilter('${word.keyword}')"
+    class="pointer"
+    >
+    ${word.keyword}
+    </p>
+    `
+  })
+
+  return strHTML
+}
+
 function onRenderPage(pageName) {
   closeMenu()
   onCloseEditor()
@@ -151,4 +199,8 @@ function showUserModal(msg) {
   setTimeout(() => {
     elModal.style.bottom = '-100px'
   }, 3000)
+}
+
+function activatePicker(selector) {
+  document.querySelector(selector).click()
 }

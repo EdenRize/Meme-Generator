@@ -24,7 +24,11 @@ function onSetFilter(filter) {
   const elMemeContainer = document.querySelector('.memes-container')
 
   if (elMemeContainer) {
-    elMemeContainer.innerHTML = getHTMLGalleryMemes(getGimges())
+    if (filter === '') renderGallery()
+    else elMemeContainer.innerHTML = getHTMLGalleryMemes(getGimges())
+
+    document.querySelector('.search-input').value = filter
+    renderKeywords()
   }
 }
 

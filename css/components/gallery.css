@@ -29,7 +29,6 @@
   align-items: center;
   position: relative;
   width: 100%;
-  margin-block-end: 10px;
 }
 
 .search-input {
@@ -56,4 +55,35 @@
   position: absolute;
   right: 10px;
   width: 25px;
+}
+
+.user-upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark-color1);
+  border-radius: 10px;
+}
+
+.user-upload-container img {
+  width: 40px;
+}
+
+.search-keywords-container {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.search-keywords-container p {
+  display: flex;
+  align-items: center;
+  margin-inline: 5px;
+  justify-self: center;
+  transition: 0.2s;
+}
+
+.memes-container p {
+  margin-block-start: 40px;
+  text-align: center;
+  grid-column: span 3;
 }

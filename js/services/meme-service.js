@@ -142,11 +142,21 @@ function setMeme(isRandom, elImg, imgId, isSaved, memeIdx) {
       170,
       40,
       'center',
+      'impact',
       25
     )
   else {
-    addLine('I sometimes eat Falafel', 'white', 'black', 170, 40, 'center', 25)
-    addLine('And I like it', 'white', 'black', 170, 40, 'center', 25)
+    addLine(
+      'I sometimes eat Falafel',
+      'white',
+      'black',
+      170,
+      40,
+      'center',
+      'impact',
+      25
+    )
+    addLine('And I like it', 'white', 'black', 170, 40, 'center', 'impact', 25)
   }
   gMeme.selectedLineIdx = 0
 }
@@ -175,6 +185,7 @@ function addLine(
   x,
   y,
   txtAlign,
+  fontFamily,
   size = gElCanvas.width / 11
 ) {
   gMeme.lines.push({
@@ -185,6 +196,7 @@ function addLine(
     x,
     y,
     txtAlign,
+    fontFamily,
     isDrag: false,
   })
 
@@ -218,9 +230,6 @@ function deleteLine() {
 function saveMeme(savedMemeIdx) {
   var memes = getFromStorage('savedMemes')
   if (!memes || !memes.length) memes = []
-
-  gMeme.fontFamily = gFontFamily
-  // gMeme.textAlign = gTextAlign
 
   const currElImg = gMeme.elImg
   gMeme.elImg = {

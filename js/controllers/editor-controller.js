@@ -1,13 +1,11 @@
 var gColor
 var gStroke
 var gSize
-var gFontFamily
 var savedMemeIdx
 
 function initEditor(isRandom, elImg, imgId, isSaved, memeIdx) {
   gColor = 'white'
   gStroke = 'black'
-  gFontFamily = 'impact'
 
   setMeme(isRandom, elImg, imgId, isSaved, memeIdx)
   initCanvas(isRandom, true, isSaved)
@@ -33,6 +31,7 @@ function renderImojis() {
       gElCanvas.width / 2,
       gElCanvas.height / 2,
       'center',
+      'impact',
       gSize
     )
     renderMeme(true)"
@@ -58,6 +57,7 @@ function onCloseEditor() {
   document.body.style.overflowY = 'scroll'
   changeColor('white')
   changeStroke('black')
+  document.querySelector('.font-family-select').value = 'Impact'
 }
 
 function onColorChange(elInput) {
@@ -109,6 +109,7 @@ function onAddLine(ev) {
     gElCanvas.width / 2,
     gElCanvas.height / 2,
     'center',
+    'impact',
     gSize
   )
   renderMeme(true)
@@ -125,12 +126,29 @@ function onSwitchLine(ev) {
 }
 
 function onChangeFontFamily(elSelect) {
-  gFontFamily = elSelect.value
+  setGmemeLineProp('fontFamily', elSelect.value)
   renderMeme(true)
 }
 
 function onChangeAlign(dir) {
+  const line = getSelectedLine()
   setGmemeLineProp('txtAlign', dir)
+  const lineWidth = gCtx.measureText(line.txt).width
+
+  switch (dir) {
+    case 'center':
+      setGmemeLineProp('x', gElCanvas.width / 2)
+      break
+
+    case 'right':
+      setGmemeLineProp('x', gElCanvas.width - lineWidth / 2 - 10)
+      break
+
+    case 'left':
+      setGmemeLineProp('x', 0 + lineWidth / 2 + 10)
+      break
+  }
+
   renderMeme(true)
 }
 

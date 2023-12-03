@@ -35,40 +35,38 @@ function resizeCanvas() {
   renderMeme()
 }
 
-function drawText(text, size, color, stroke, align, x, y) {
-  gCtx.font = `${size}px ${gFontFamily}`
+function drawText(text, size, color, stroke, fontFamily, x, y) {
+  gCtx.font = `${size}px ${fontFamily}`
   gCtx.textAlign = 'center'
   gCtx.textBaseline = 'middle'
   gCtx.lineWidth = 2
   gCtx.strokeStyle = stroke
   gCtx.fillStyle = color
-  const lineWidth = gCtx.measureText(text).width
-
-  switch (align) {
-    case 'center':
-      x = gElCanvas.width / 2
-      break
-
-    case 'right':
-      x = 0 + lineWidth / 2
-      break
-
-    case 'left':
-      x = gElCanvas.width - lineWidth / 2
-      break
-
-    default:
-      break
-  }
 
   gCtx.fillText(text, x, y)
   gCtx.strokeText(text, x, y)
 }
 
-function drawRect(x, y, width, height) {
+function drawRect(x, y, width, height, txtAlign) {
   gCtx.beginPath()
   gCtx.lineWidth = 2
   gCtx.strokeStyle = '#00a5af'
+  if (txtAlign) {
+    switch (txtAlign) {
+      case 'center':
+        x = gElCanvas.width / 2 - width / 2
+        break
+
+      case 'right':
+        x = gElCanvas.width - width
+        break
+
+      case 'left':
+        x = 0
+        break
+    }
+  }
+
   gCtx.strokeRect(x, y, width, height)
 }
 
@@ -112,6 +110,7 @@ function onDown(ev) {
 
   switchLine(getLineIdx(gDraggedLine))
   document.querySelector('.meme-text-input').value = gDraggedLine.txt
+  setGmemeLineProp('txtAlign', null)
   renderMeme(true)
 }
 
@@ -146,8 +145,8 @@ function getClickedLine(pos) {
 
 function isLineClicked(clickedPos, line) {
   return (
-    clickedPos.x >= line.x - line.txtWidth &&
-    clickedPos.x <= line.x + line.txtWidth &&
+    clickedPos.x >= line.x - line.txtWidth / 2 - 10 &&
+    clickedPos.x <= line.x + line.txtWidth / 2 + 10 &&
     clickedPos.y >= line.y - line.size / 2 - 10 &&
     clickedPos.y <= line.y + line.size / 2 + 10
   )
@@ -217,7 +216,7 @@ function renderMeme(isRect = false) {
       line.size,
       line.color,
       line.stroke,
-      line.txtAlign,
+      line.fontFamily,
       line.x,
       line.y
     )
@@ -246,10 +245,13 @@ function coverCanvasWithImg(elImg) {
 }
 
 function addRect(line) {
+  const txtWidth = line.txtWidth
+  const txtSize = line.size
   drawRect(
-    line.x - line.txtWidth / 2 - 10,
-    line.y - line.size / 2,
-    line.txtWidth + 20,
-    line.size
+    line.x - txtWidth / 2 - 10,
+    line.y - txtSize / 2,
+    txtWidth + 20,
+    txtSize,
+    line.txtAlign
   )
 }

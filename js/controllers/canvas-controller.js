@@ -120,7 +120,6 @@ function onMove(ev) {
 function onUp(ev) {
   gDraggedLine = null
   document.querySelector('canvas').style.cursor = 'grab'
-  document.querySelector('.meme-text-input').focus()
 }
 
 function getClickedLine(pos) {

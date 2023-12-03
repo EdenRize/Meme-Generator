@@ -110,6 +110,9 @@ function onDown(ev) {
 
   switchLine(getLineIdx(gDraggedLine))
   document.querySelector('.meme-text-input').value = gDraggedLine.txt
+  document.querySelector('.font-family-select').value =
+    gDraggedLine.fontFamily.charAt(0).toUpperCase() +
+    gDraggedLine.fontFamily.substring(1)
   setGmemeLineProp('txtAlign', null)
   renderMeme(true)
 }

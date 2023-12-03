@@ -9,11 +9,7 @@ function onOpenEditor(isRandom, elImg, isSaved, memeIdx) {
   const elEditor = document.querySelector('.editor-container')
   elEditor.classList.add('opened-editor')
   elEditor.dataset.imgId = imgId
-  const img = getImg(imgId)
-  if (isSaved) {
-    // elImg = new Image()
-    // elImg.src = img.url
-  }
+
   initEditor(isRandom, elImg, imgId, isSaved, memeIdx)
   document.body.style.overflowY = 'hidden'
   closeMenu()

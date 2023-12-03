@@ -16,8 +16,9 @@ function onOpenEditor(isRandom, elImg, isSaved, memeIdx) {
 }
 
 function onRandomMeme() {
-  const elImges = document.querySelectorAll('.meme-img')
-  const elImg = elImges[getRandomInt(0, elImges.length)]
+  const elImgs = document.querySelectorAll('.meme-img')
+  if (!elImgs.length) return
+  const elImg = elImgs[getRandomInt(0, elImgs.length)]
   onOpenEditor(true, elImg)
 }
 

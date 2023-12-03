@@ -278,8 +278,6 @@ function addImg(elImg) {
   var userImgs = getFromStorage('user-imgs')
   if (!userImgs || !userImgs.length) userImgs = []
   userImgs.unshift(img)
-  console.log('userImgs', userImgs)
-
   saveToStorage('user-imgs', userImgs)
 
   return { id, imgIdx: gImgs.length - 1 }

@@ -30,22 +30,37 @@ function setInitLines() {
 }
 
 function resizeCanvas() {
-  // gPrevCanvasWidth = gElCanvas.width
   const elContainer = document.querySelector('.canvas-container')
   gElCanvas.width = elContainer.clientWidth
-  // gWidthDiff = gElCanvas.width - gPrevCanvasWidth
-  // console.log('gPrevCanvasWidth', gPrevCanvasWidth)
-  // console.log('gElCanvas.width', gElCanvas.width)
   renderMeme()
 }
 
-function drawText(text, size, color, stroke, x, y) {
+function drawText(text, size, color, stroke, align, x, y) {
   gCtx.font = `${size}px ${gFontFamily}`
-  gCtx.textAlign = `${gTextAlign}`
+  gCtx.textAlign = 'center'
   gCtx.textBaseline = 'middle'
   gCtx.lineWidth = 2
   gCtx.strokeStyle = stroke
   gCtx.fillStyle = color
+  const lineWidth = gCtx.measureText(text).width
+
+  switch (align) {
+    case 'center':
+      x = gElCanvas.width / 2
+      break
+
+    case 'right':
+      x = 0 + lineWidth / 2
+      break
+
+    case 'left':
+      x = gElCanvas.width - lineWidth / 2
+      break
+
+    default:
+      break
+  }
+
   gCtx.fillText(text, x, y)
   gCtx.strokeText(text, x, y)
 }
@@ -197,7 +212,15 @@ function renderMeme(isRect = false) {
     return
   }
   meme.lines.map((line, idx) => {
-    drawText(line.txt, line.size, line.color, line.stroke, line.x, line.y)
+    drawText(
+      line.txt,
+      line.size,
+      line.color,
+      line.stroke,
+      line.txtAlign,
+      line.x,
+      line.y
+    )
     setGmemeLineProp('txtWidth', gCtx.measureText(line.txt).width, idx)
   })
 
@@ -224,9 +247,9 @@ function coverCanvasWithImg(elImg) {
 
 function addRect(line) {
   drawRect(
-    line.x - line.txtWidth,
+    line.x - line.txtWidth / 2 - 10,
     line.y - line.size / 2,
-    line.txtWidth * 2,
+    line.txtWidth + 20,
     line.size
   )
 }

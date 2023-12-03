@@ -2,14 +2,12 @@ var gColor
 var gStroke
 var gSize
 var gFontFamily
-var gTextAlign
 var savedMemeIdx
 
 function initEditor(isRandom, elImg, imgId, isSaved, memeIdx) {
   gColor = 'white'
   gStroke = 'black'
   gFontFamily = 'impact'
-  gTextAlign = 'center'
 
   setMeme(isRandom, elImg, imgId, isSaved, memeIdx)
   initCanvas(isRandom, true, isSaved)
@@ -34,6 +32,7 @@ function renderImojis() {
       gStroke,
       gElCanvas.width / 2,
       gElCanvas.height / 2,
+      'center',
       gSize
     )
     renderMeme(true)"
@@ -109,6 +108,7 @@ function onAddLine(ev) {
     gStroke,
     gElCanvas.width / 2,
     gElCanvas.height / 2,
+    'center',
     gSize
   )
   renderMeme(true)
@@ -130,7 +130,7 @@ function onChangeFontFamily(elSelect) {
 }
 
 function onChangeAlign(dir) {
-  gTextAlign = dir
+  setGmemeLineProp('txtAlign', dir)
   renderMeme(true)
 }
 

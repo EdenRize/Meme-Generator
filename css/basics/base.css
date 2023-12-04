@@ -14,7 +14,7 @@ body {
 main {
   position: relative;
   width: 90%;
-  min-height: calc(100vh - 49px - 30px - 15px - 39px);
+  min-height: calc(100vh - 49px - 49px - 45px);
   margin: auto;
   margin-block-start: 15px;
   padding-block: 10px;
